@@ -1,0 +1,100 @@
+:: Widgets Riding [widget]
+<<widget "steed_text">><<silently>>
+	<<if $steed is "male">>
+		<<set _trResult to "켄타우로스">><<trPost 1 _args[0] _args[1]>>
+	<<elseif $steed is "female">>
+		<<set _trResult to "켄타우로스">><<trPost 1 _args[0] _args[1]>>
+	<<elseif $steed is "mare">>
+		<<set _trResult to "암말">><<trPost 2 _args[0] _args[1]>>
+	<<elseif $steed is "stallion">>
+		<<set _trResult to "수말">><<trPost 2 _args[0] _args[1]>>
+	<</if>>
+	<</silently>><<print _trResult>>
+<</widget>>
+
+<<widget "steed_he">><<silently>>
+	<<if $steed is "male">>
+		<<set _trResult to "그">><<trPost 1 _args[0] _args[1]>>
+	<<elseif $steed is "female">>
+		<<set _trResult to "그녀">><<trPost 1 _args[0] _args[1]>>
+	<<elseif $steed is "mare">>
+		<<set _trResult to "녀석">><<trPost 0 _args[0] _args[1]>>
+	<<elseif $steed is "stallion">>
+		<<set _trResult to "녀석">><<trPost 0 _args[0] _args[1]>>
+	<</if>>
+	<</silently>><<print _trResult>>
+<</widget>>
+
+<<widget "steed_He">><<silently>>
+	<<if $steed is "male">>
+		<<set _trResult to "그">><<trPost 1 _args[0] _args[1]>>
+	<<elseif $steed is "female">>
+		<<set _trResult to "그녀">><<trPost 1 _args[0] _args[1]>>
+	<<elseif $steed is "mare">>
+		<<set _trResult to "녀석">><<trPost 0 _args[0] _args[1]>>
+	<<elseif $steed is "stallion">>
+		<<set _trResult to "녀석">><<trPost 0 _args[0] _args[1]>>
+	<</if>>
+	<</silently>><<print _trResult>>
+<</widget>>
+
+<<widget "steed_him">><<silently>>
+	<<if $steed is "male">>
+		<<set _trResult to "그">><<trPost 1 _args[0] _args[1]>>
+	<<elseif $steed is "female">>
+		<<set _trResult to "그녀">><<trPost 1 _args[0] _args[1]>>
+	<<elseif $steed is "mare">>
+		<<set _trResult to "녀석">><<trPost 0 _args[0] _args[1]>>
+	<<elseif $steed is "stallion">>
+		<<set _trResult to "녀석">><<trPost 0 _args[0] _args[1]>>
+	<</if>>
+	<</silently>><<print _trResult>>
+<</widget>>
+
+<<widget "steed_his">><<silently>>
+	<<if $steed is "male">>
+		<<set _trResult to "그">><<trPost 1 _args[0] _args[1]>>
+	<<elseif $steed is "female">>
+		<<set _trResult to "그녀">><<trPost 1 _args[0] _args[1]>>
+	<<elseif $steed is "mare">>
+		<<set _trResult to "녀석">><<trPost 0 _args[0] _args[1]>>
+	<<elseif $steed is "stallion">>
+		<<set _trResult to "녀석">><<trPost 0 _args[0] _args[1]>>
+	<</if>>
+	<</silently>><<print _trResult>>
+<</widget>>
+
+<<widget "steed_init">>
+	<<if $steed is "male">>
+		<<if $cbchance gte random(1, 100)>>
+			<<beastNEWinit 1 horse m vagina monster>>
+			<<set $NPCList[_n].stance to "top">><<set $position to "missionary">><<set $position_lock to 1>>
+		<<else>>
+			<<beastNEWinit 1 horse m penis monster>>
+			<<set $NPCList[_n].stance to "top">><<set $position to "doggy">><<set $position_lock to 1>>
+		<</if>>
+	<<elseif $steed is "female">>
+		<<if $dgchance gte random(1, 100)>>
+			<<beastNEWinit 1 horse f penis monster>>
+			<<set $NPCList[_n].stance to "top">><<set $position to "doggy">><<set $position_lock to 1>>
+		<<else>>
+			<<beastNEWinit 1 horse f vagina monster>>
+			<<set $NPCList[_n].stance to "top">><<set $position to "missionary">><<set $position_lock to 1>>
+		<</if>>
+	<<elseif $steed is "mare">>
+		<<beastNEWinit 1 horse f vagina beast>>
+		<<set $NPCList[_n].stance to "top">><<set $position to "missionary">><<set $position_lock to 1>>
+	<<else>>
+		<<beastNEWinit 1 horse m penis beast>>
+		<<set $NPCList[_n].stance to "top">><<set $position to "doggy">><<set $position_lock to 1>>
+	<</if>>
+	<<prop haybale>>
+<</widget>>
+
+<<widget "steed_type">>
+	<<if ($monsterchance gte random(1, 100) and ($hallucinations gte 1 or $monsterhallucinations is "f")) or ($bestialitydisable is "t")>>
+		<<set _trResult to "켄타우로스들">><<trPost 2 _args[0] _args[1]>><<print _trResult>>
+	<<else>>
+		<<set _trResult to "말들">><<trPost 2 _args[0] _args[1]>><<print _trResult>>
+	<</if>>
+<</widget>>
