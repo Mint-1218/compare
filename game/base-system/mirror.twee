@@ -53,108 +53,108 @@
 		<<set $_semen to _args[1]>>
 		<<set $_slime to _args[2]>>
 		<<set $_nectar to _args[3]>>
-		당신의
-		<<if $_part is "허벅지" or $_part is "엉덩이" or $_part is "배" >>
-			<<= $_part >>는
+		Your $_part
+		<<if $_part is "thighs" or $_part is "feet">>
+			are
 		<<else>>
-			<<= $_part >>은
+			is
 		<</if>>
 		<<if $_semen gt 0>>
 			<<switch Math.clamp($_semen, 1, 5)>>
-				<<case 1>> <span class="blue">정액으로 축축해져</span>
-				<<case 2>> <span class="purple">정액으로 적셔져</span>
-				<<case 3>> <span class="purple">정액으로 미끄러워져</span>
-				<<case 4>> <span class="pink">정액으로 젖어</span>
-				<<case 5>> <span class="red">정액으로 흠뻑 젖어</span>
+				<<case 1>> <span class="blue">moist</span> with
+				<<case 2>> <span class="purple">wet</span> with
+				<<case 3>> <span class="purple">slick</span> with
+				<<case 4>> <span class="pink">soaked</span> in
+				<<case 5>> <span class="red">drenched</span> in
 			<</switch>>
 			<<if $_slime gt 0 and $_nectar gt 0>>
-				있고,
+				semen,
 			<<elseif $_slime gt 0 or $_nectar gt 0>>
-				있고
+				semen and
 			<<else>>
-				있다.
+				semen.
 			<</if>>
 		<</if>>
 		<<if $_slime gt 0>>
 			<<switch Math.clamp($_slime, 1, 5)>>
-				<<case 1>> <span class="blue">점액으로 축축해져</span>
-				<<case 2>> <span class="purple">점액으로 적셔져</span>
-				<<case 3>> <span class="purple">점액으로 미끄러워져</span>
-				<<case 4>> <span class="pink">점액으로 젖어</span>
-				<<case 5>> <span class="red">점액으로 흠뻑 젖어</span>
+				<<case 1>> <span class="blue">moist</span> with
+				<<case 2>> <span class="purple">wet</span> with
+				<<case 3>> <span class="purple">slick</span> with
+				<<case 4>> <span class="pink">soaked</span> in
+				<<case 5>> <span class="red">drenched</span> in
 			<</switch>>
 			<<if $_nectar gt 0>>
-				있고
+				slime and
 			<<else>>
-				있다.
+				slime.
 			<</if>>
 		<</if>>
 		<<if $_nectar gt 0>>
 			<<switch Math.clamp($_nectar, 1, 5)>>
-				<<case 1>> <span class="blue">꿀로 축축해져</span>
-				<<case 2>> <span class="purple">꿀로 적셔져</span>
-				<<case 3>> <span class="purple">꿀로 미끄러워져</span>
-				<<case 4>> <span class="pink">꿀로 젖어</span>
-				<<case 5>> <span class="red">꿀로 흠뻑 젖어</span>
+				<<case 1>> <span class="blue">moist</span> with
+				<<case 2>> <span class="purple">wet</span> with
+				<<case 3>> <span class="purple">slick</span> with
+				<<case 4>> <span class="pink">soaked</span> in
+				<<case 5>> <span class="red">drenched</span> in
 			<</switch>>
-			있다.
+			nectar.
 		<</if>>
 	<</if>>
 <</widget>>
 
 <<widget "mirrorMenu">>
 	<<set $_mirror to _args[0] || 'mirror'>>
-	당신은 거울을 들여다본다.
+	You look into the $_mirror.
 	<<if $fallenangel is 2>>
-		사람 같지도 않은 모습의 인물이
+		A pathetic excuse of a person
 	<<elseif $hallucinogen gte 200>>
-		거울이 새까만 검은 웅덩이로 녹아내리더니, 당신의 앞에 둥둥 떠있다.
+		The $_mirror melts away into an inky black puddle, floating before you.
 		<<if $_mirror is 'mirror'>>
-			유리 파편이 당신의 살갗을 스치고 지나가더니 허공 속으로 녹아든다.
+			Shards of glass graze past your skin and dissolve into the air.
 		<</if>>
 		<br>
-		당신은 공허 속을 바라보고, 공허 또한
+		You stare into the void, and the void
 	<<elseif $hallucinogen gte 100>>
-		이해할 수 없는 각도로 그 표면이 일그러지기 시작하더니, 무언가 알아볼 수 없는 것이
+		The surface folds over itself at an angle you can't quite understand, and something unrecognisable
 	<<elseif $hallucinogen gt 0>>
-		그 앞에 서자 표면에 파문이 일더니, 어렴풋이 익숙한 소녀가
+		The surface ripples at your presence, and a vaguely familiar <<girl>>
 	<<elseif $trauma gte $traumamax>>
-		멍한 눈의 소녀가
+		A <<girl>> with glazed eyes
 	<<else>>
-		<<= $pain gte 100 ? "울고 있는" : $pain gte 40 ? "눈물이 그렁그렁한" : $pain gte 1 ? "얼굴을 찌푸린" : "활발한">> 소녀가
+		A <<= $pain gte 100 ? "crying" : $pain gte 40 ? "tearful" : $pain gte 1 ? "frowning" : "cheerful">> <<girl>>
 	<</if>>
-	이쪽을 바라보고 있다.
+	stares back.
 	<<if ["haunt", "despair"].includes($wraith.state) and $hallucinations gte 1 and ((random(1, 100) is 1) or ($controlled is 0 and random(1, 100) lte 5))>>
-		<span class="fading">창백한 형체가 당신 뒤에 서 있다.</span>
+		<span class="fading">A pale figure stands behind.</span>
 	<</if>>
 	<br><br>
-	<<crimeicon "mark">><<link "다른 사람들이 당신을 어떻게 바라보는지 확인한다">><<set $mirrorMenu to "appearance">><<replace #mirror>><<mirrorDisplay>><</replace>><<numberify "#passages > .passage">><</link>>
+	<<crimeicon "mark">><<link "Examine how you are seen by others">><<set $mirrorMenu to "appearance">><<replace #mirror>><<mirrorDisplay>><</replace>><<numberify "#passages > .passage">><</link>>
 	<br><br>
 	<<if !$simpleMirror>>
-		__피부__
+		__Appearance__
 		<br>
-		<<investigateicon>><<link "피부를 확인한다">><<set $mirrorMenu to "skin">><<replace #mirror>><<mirrorDisplay>><</replace>><<numberify "#passages > .passage">><</link>>
+		<<investigateicon>><<link "Examine your body">><<set $mirrorMenu to "skin">><<replace #mirror>><<mirrorDisplay>><</replace>><<numberify "#passages > .passage">><</link>>
 		<br><br>
 	<</if>>
-	__머리__
+	__Hair__
 	<br>
-	<<hairdressericon "hairspray">><<link "머리 스타일을 바꾼다">><<set $mirrorMenu to "hair">><<replace #mirror>><<mirrorDisplay>><</replace>><<numberify "#passages > .passage">><</link>>
+	<<hairdressericon "hairspray">><<link "Change your hair style">><<set $mirrorMenu to "hair">><<replace #mirror>><<mirrorDisplay>><</replace>><<numberify "#passages > .passage">><</link>>
 	<br><br>
-	__화장__
+	__Makeup__
 	<br>
-	<<cosmeticsicon>><<link "화장을 한다">><<set $mirrorMenu to "makeup">><<replace #mirror>><<mirrorDisplay>><</replace>><<numberify "#passages > .passage">><</link>>
+	<<cosmeticsicon>><<link "Apply makeup">><<set $mirrorMenu to "makeup">><<replace #mirror>><<mirrorDisplay>><</replace>><<numberify "#passages > .passage">><</link>>
 	<br><br>
 
 	<<if $worn.neck.name is "love locket">>
-		__로켓__
+		__Locket__
 		<br>
-		<span @class="'clothes-'+$worn.neck.colour.replace(' ','-')"><<icon "locket.png">></span><<link [[로켓의 사진을 바꾼다|Mirror Locket]]>><<set $passage_mirror to $passage>><</link>>
+		<span @class="'clothes-'+$worn.neck.colour.replace(' ','-')"><<icon "locket.png">></span><<link [[Customise locket|Mirror Locket]]>><<set $passage_mirror to $passage>><</link>>
 		<br><br>
 	<</if>>
 
 	<<if !$simpleMirror>>
 		<<if $specialTransform is 1 or $physicalTransform is 1>>
-			__변형__
+			__Transformation__
 			<br>
 			<<if $demon gte 6>><<tficon "demon">>
 			<<elseif $wolfgirl gte 6>><<tficon "wolf">>
@@ -166,9 +166,9 @@
 			<<elseif $fox gte 6>><<tficon "fox">>
 			<<else>><<tficon "angel">>
 			<</if>>
-			<<link "내적 자아를 살펴본다">><<set $mirrorMenu to "transformation">><<replace #mirror>><<mirrorDisplay>><</replace>><<numberify "#passages > .passage">><</link>>
+			<<link "Examine your inner self">><<set $mirrorMenu to "transformation">><<replace #mirror>><<mirrorDisplay>><</replace>><<numberify "#passages > .passage">><</link>>
 		<<else>>
-			이 이상 살펴보려면 이세계의 힘을 획득해야 한다.
+			Obtain otherworldly powers to examine further.
 		<</if>>
 	<</if>>
 	<br><br>
@@ -176,22 +176,22 @@
 
 <<widget "mirrorGender">>
 	<div class="settingsGrid">
-		<div class="settingsHeader">외모 특성</div>
+		<div class="settingsHeader">Gender Appearance</div>
 		<<settextcolorfromfemininity $player.femininity>>
 		<div class="settingsToggleItem">
-			당신은 <span @class="_text_color"><<if playerBellyVisible(true)>>임신한 <</if>>소녀처럼 보인다.</span>
+			You look like a <span @class="_text_color"><<if playerBellyVisible(true)>>pregnant <</if>><<girl>>.</span>
 		</div>
 		<div class="settingsToggleItem">
-			<span class="gold bold">성별:</span>
+			<span class="gold bold">Gender:</span>
 			<br>
-			<label class="blue">남자 <<radiobutton "$player.gender" "m" autocheck>></label> |
-			<label class="pink">여자 <<radiobutton "$player.gender" "f" autocheck>></label> |
-			<label class="purple">둘 다 아님 <<radiobutton "$player.gender" "n" autocheck>></label>
+			<label class="blue">Male <<radiobutton "$player.gender" "m" autocheck>></label> |
+			<label class="pink">Female <<radiobutton "$player.gender" "f" autocheck>></label> |
+			<label class="purple">Neither <<radiobutton "$player.gender" "n" autocheck>></label>
 			<br>
-			<span class="small-description">당신이 자신을 어떻게 인식하는지에 대한 것입니다. 당신의 성기나 그로 인한 타인의 반응을 바꾸지 않습니다.</span>
+			<span class="small-description">How you see yourself. Does not change your genitals or affect how other people perceive you.</span>
 		</div>
 		<div class="settingsToggleItem">
-			<span class="gold bold">아래의 요인들이 그런 인상에 기여하고 있다:</span>
+			<span class="gold bold">Contributing Factors:</span>
 			<br>
 			<<for _x range $player.gender_appearance_factors>>
 				<<if _x.femininity is 0 or !_x.factor>>
@@ -214,27 +214,27 @@
 			<</for>>
 			<<if $debug is 1>>
 				<<settextcolorfromfemininity $player.femininity>>
-				여성성 수치 총계: <span @class="_text_color">$player.femininity</span>
+				Total femininity: <span @class="_text_color">$player.femininity</span>
 				<br>
 			<</if>>
 		</div>
 		<div class="settingsToggleItem">
-			<span class="gold bold">태도:</span>
+			<span class="gold bold">Behaviour:</span>
 			<br>
-			<<if $player.gender_posture is "자">>
-				당신은 한 바퀴 돌며 자신의 모습을 살펴본다. 당신은 소녀처럼 보인다. 다른 방식으로 행동한다면 그 인상을 바꿀 수 있을지도 모른다.
-			<<elseif $player.gender_posture is "여">>
-				당신은 여자들이 할 법한 자세를 몇 개 취해보고는 최대한 여성스러운 목소리를 내본다.
+			<<if $player.gender_posture is "n">>
+				You turn around to get a look at yourself. You look like a <<girl>>. Maybe if you carried yourself differently, you could change that.
+			<<elseif $player.gender_posture is "f">>
+				You strike a few girly poses and put on your best feminine voice.
 				<br>
-				<span class="pink">다른 사람들은 당신이 소녀라고 생각할 것이다.</span>
-			<<elseif $player.gender_posture is "남">>
-				당신은 근육에 힘을 주고 목소리를 조금 걸걸하게 만들어본다.
+				<span class="pink">Others will be more likely to think that you're a girl.</span>
+			<<elseif $player.gender_posture is "m">>
+				You flex your muscles and add some gruff to your voice.
 				<br>
-				<span class="lblue">다른 사람들은 당신이 소년이라고 생각할 것이다.</span>
+				<span class="lblue">Others will be more likely to think that you're a boy.</span>
 			<</if>>
 			<br><br>
-			<<set _postures to ["남성적임", "여성적임", "자연스러움"]>>
-			자세:
+			<<set _postures to ["masculine", "feminine", "natural"]>>
+			Posture:
 			<<capture _i>>
 				<<for _i = 0; _i < _postures.length; _i++>>
 					<span @class="$player.gender_posture is _postures[_i].charAt(0) ? 'goldLink no-numberify' : 'unselected no-numberify'">
@@ -251,7 +251,7 @@
 <</widget>>
 
 <<widget "mirrorAppearance">>
-	<<mirroricon>><<link "뒤로">><<replace #mirror>><<mirrorMenu>><</replace>><<numberify "#passages > .passage">><<unset $mirrorMenu>><</link>>
+	<<mirroricon>><<link "Back">><<replace #mirror>><<mirrorMenu>><</replace>><<numberify "#passages > .passage">><<unset $mirrorMenu>><</link>>
 	<br><br>
 	<span id="mirrorGender">
 		<<mirrorGender>>
@@ -266,151 +266,151 @@
 			_increaseAttractive.push(name);
 		}>>
 		<<if $beauty gte ($beautymax / 7) * 6>>
-			<<run _increaseBoth("미모: 성스러움 +++++")>>
+			<<run _increaseBoth("Beauty: Divine +++++")>>
 		<<elseif $beauty gte ($beautymax / 7) * 5>>
-			<<run _increaseBoth("미모: 매혹적임 ++++")>>
+			<<run _increaseBoth("Beauty: Ravishing ++++")>>
 		<<elseif $beauty gte ($beautymax / 7) * 4>>
-			<<run _increaseBoth("미모: 아름다움 +++")>>
+			<<run _increaseBoth("Beauty: Beautiful +++")>>
 		<<elseif $beauty gte ($beautymax / 7) * 3>>
-			<<run _increaseBoth("미모: 매력적임 ++")>>
+			<<run _increaseBoth("Beauty: Charming ++")>>
 		<<elseif $beauty gte ($beautymax / 7) * 2>>
-			<<run _increaseBoth("미모: 예쁨 +")>>
+			<<run _increaseBoth("Beauty: Pretty +")>>
 		<<elseif $beauty gte ($beautymax / 7)>>
-			<<run _increaseBoth("미모: 귀여움")>>
+			<<run _increaseBoth("Beauty: Cute")>>
 		<</if>>
-		<<run _increaseBoth(`머리 길이 ${$hairlength gte 333 ? "+".repeat($hairlength gte 666 ? 2 : 1) : ""}`)>>
+		<<run _increaseBoth(`Hair length ${$hairlength gte 333 ? "+".repeat($hairlength gte 666 ? 2 : 1) : ""}`)>>
 		<<if $worn.upper.type.includes("naked")>>
-			<<run _increaseBoth("상의를 입지 않음")>>
+			<<run _increaseBoth("Topless")>>
 		<<elseif $worn.upper.reveal gte 500>>
-			<<run _increaseBoth("몸매가 드러나는 상의")>>
+			<<run _increaseBoth("Revealing top")>>
 		<</if>>
 		<<if $worn.lower.type.includes("naked")>>
-			<<run _increaseBoth("하의를 입지 않음")>>
+			<<run _increaseBoth("Bottomless")>>
 		<<elseif $worn.lower.reveal gte 500>>
-			<<run _increaseBoth("몸매가 드러나는 하의")>>
+			<<run _increaseBoth("Revealing bottoms")>>
 		<</if>>
 		<<if $worn.under_lower.type.includes("naked")>>
-			<<run _increaseBoth("팬티를 입지 않음")>>
+			<<run _increaseBoth("Pantiless")>>
 		<<elseif $worn.under_lower.reveal gte 500>>
-			<<run _increaseBoth("섹시한 속옷")>>
+			<<run _increaseBoth("Sexy underwear")>>
 		<</if>>
 		<<if $wolfgirl gte 6>>
-			<<run _increaseBoth(`늑대 ${"+".repeat(2 - ["ears", "tail"].filter(p => $transformationParts.wolf[p] is "hidden").length)}`)>>
+			<<run _increaseBoth(`Wolfy ${"+".repeat(2 - ["ears", "tail"].filter(p => $transformationParts.wolf[p] is "hidden").length)}`)>>
 		<</if>>
 		<<if $cat gte 6>>
-			<<run _increaseBoth(`고양이 ${"+".repeat(2 - ["ears", "tail"].filter(p => $transformationParts.cat[p] is "hidden").length)}`)>>
+			<<run _increaseBoth(`Catlike ${"+".repeat(2 - ["ears", "tail"].filter(p => $transformationParts.cat[p] is "hidden").length)}`)>>
 		<</if>>
 		<<if $cow gte 6>>
-			<<run _increaseBoth(`소 ${"+".repeat(2 - Math.ceil(["ears", "tail", "horns"].filter(p => $transformationParts.cow[p] is "hidden").length / 2))}`)>>
+			<<run _increaseBoth(`Bovine ${"+".repeat(2 - Math.ceil(["ears", "tail", "horns"].filter(p => $transformationParts.cow[p] is "hidden").length / 2))}`)>>
 		<</if>>
 		<<if $harpy gte 6>>
-			<<run _increaseBoth(`하피 ${"+".repeat(2 - Math.ceil(["tail", "eyes", "malar", "plumage", "wings"].filter(p => $transformationParts.bird[p] is "hidden").length / 3))}`)>>
+			<<run _increaseBoth(`Harpy ${"+".repeat(2 - Math.ceil(["tail", "eyes", "malar", "plumage", "wings"].filter(p => $transformationParts.bird[p] is "hidden").length / 3))}`)>>
 		<</if>>
 		<<if $fox gte 6>>
-			<<run _increaseAttractive.push(`여우 ${"+".repeat(3 - ["ears", "tail"].filter(p => $transformationParts.fox[p] is "hidden").length)}`)>>
-			<<run _increaseAllure.push(`여우 ${"+".repeat(3 - ["ears", "tail"].filter(p => $transformationParts.fox[p] is "hidden").length)}`)>>
+			<<run _increaseAttractive.push(`Vulpine ${"+".repeat(3 - ["ears", "tail"].filter(p => $transformationParts.fox[p] is "hidden").length)}`)>>
+			<<run _increaseAllure.push(`Foxy ${"+".repeat(3 - ["ears", "tail"].filter(p => $transformationParts.fox[p] is "hidden").length)}`)>>
 		<</if>>
 		<<if $angel gte 6>>
-			<<run _increaseBoth(`천사 ${"+".repeat(2 - ["halo", "wings"].filter(p => $transformationParts.angel[p] is "hidden").length)}`)>>
+			<<run _increaseBoth(`Angel ${"+".repeat(2 - ["halo", "wings"].filter(p => $transformationParts.angel[p] is "hidden").length)}`)>>
 		<</if>>
 		<<if $fallenangel gte 2>>
-			<<run _increaseBoth(`타천사 ${"+".repeat(2 - ["halo", "wings"].filter(p => $transformationParts.fallenAngel[p] is "hidden").length)}`)>>
+			<<run _increaseBoth(`Fallen angel ${"+".repeat(2 - ["halo", "wings"].filter(p => $transformationParts.fallenAngel[p] is "hidden").length)}`)>>
 		<</if>>
 		<<if $demon gte 6>>
-			<<run _increaseBoth(`악마 ${"+".repeat(2 - Math.ceil(["horns", "tail", "wings"].filter(p => $transformationParts.demon[p] is "hidden").length / 2))}`)>>
+			<<run _increaseBoth(`Demon ${"+".repeat(2 - Math.ceil(["horns", "tail", "wings"].filter(p => $transformationParts.demon[p] is "hidden").length / 2))}`)>>
 		<</if>>
 		<<if $earSlime.growth gt 50>>
-			<<run _increaseAllure.push(`귀 슬라임 페로몬${$earSlime.growth gt 75 ? " " + "+".repeat(Math.ceil(($earSlime.growth - 75) / 25)): ""}`)>>
+			<<run _increaseAllure.push(`Ear slime pheromones${$earSlime.growth gt 75 ? " " + "+".repeat(Math.ceil(($earSlime.growth - 75) / 25)): ""}`)>>
 		<</if>>
 		<<if $makeup.lipstick != 0 or $makeup.eyeshadow != 0 or $makeup.mascara != 0 or $makeup.blusher != 0>>
-			<<run _increaseAllure.push("매혹적인 화장")>>
-			<<run _increaseAttractive.push("매력적인 화장")>>
+			<<run _increaseAllure.push("Alluring makeup")>>
+			<<run _increaseAttractive.push("Attractive makeup")>>
 		<</if>>
 		<<if $worn.upper.reveal + $worn.lower.reveal gte 50>>
-			<<set $_outfit to $worn.lower.name is "naked" or ($worn.upper.name is "naked" and $player.perceived_breastsize gt 2) ? '"옷차림"' : '옷차림'>>
-			<<run _increaseAllure.push(`매혹적인 ${$_outfit} ${"+".repeat(Math.floor(($worn.upper.reveal + $worn.lower.reveal) / 400))}`)>>
-			<<run _increaseAttractive.push(`멋진 ${$_outfit} ${"+".repeat(Math.floor(($worn.upper.reveal + $worn.lower.reveal) / 400))}`)>>
+			<<set $_outfit to $worn.lower.name is "naked" or ($worn.upper.name is "naked" and $player.perceived_breastsize gt 2) ? '"outfit"' : 'outfit'>>
+			<<run _increaseAllure.push(`Alluring ${$_outfit} ${"+".repeat(Math.floor(($worn.upper.reveal + $worn.lower.reveal) / 400))}`)>>
+			<<run _increaseAttractive.push(`Attractive ${$_outfit} ${"+".repeat(Math.floor(($worn.upper.reveal + $worn.lower.reveal) / 400))}`)>>
 		<</if>>
 		<<if $worn.head.reveal gte 50>>
-			<<run _increaseAllure.push(`매혹적인 모자 ${"+".repeat(Math.floor($worn.head.reveal / 200))}`)>>
-			<<run _increaseAttractive.push(`멋진 모자 ${"+".repeat(Math.floor($worn.head.reveal / 200))}`)>>
+			<<run _increaseAllure.push(`Alluring headwear ${"+".repeat(Math.floor($worn.head.reveal / 200))}`)>>
+			<<run _increaseAttractive.push(`Attractive headwear ${"+".repeat(Math.floor($worn.head.reveal / 200))}`)>>
 		<</if>>
 		<<if $worn.face.reveal gte 50>>
-			<<run _increaseAllure.push(`매혹적인 얼굴 악세사리 ${"+".repeat(Math.floor($worn.face.reveal / 200))}`)>>
-			<<run _increaseAttractive.push(`멋진 얼굴 악세사리 ${"+".repeat(Math.floor($worn.face.reveal / 200))}`)>>
+			<<run _increaseAllure.push(`Alluring face accessory ${"+".repeat(Math.floor($worn.face.reveal / 200))}`)>>
+			<<run _increaseAttractive.push(`Attractive face accessory ${"+".repeat(Math.floor($worn.face.reveal / 200))}`)>>
 		<</if>>
 		<<if $worn.neck.reveal gte 50>>
-			<<run _increaseAllure.push(`매혹적인 목걸이 ${"+".repeat(Math.floor($worn.neck.reveal / 200))}`)>>
-			<<run _increaseAttractive.push(`멋진 목걸이 ${"+".repeat(Math.floor($worn.neck.reveal / 200))}`)>>
+			<<run _increaseAllure.push(`Alluring neck accessory ${"+".repeat(Math.floor($worn.neck.reveal / 200))}`)>>
+			<<run _increaseAttractive.push(`Attractive neck accessory ${"+".repeat(Math.floor($worn.neck.reveal / 200))}`)>>
 		<</if>>
 		<<if $worn.legs.reveal gte 50>>
-			<<run _increaseAllure.push(`매혹적인 레그웨어 ${"+".repeat(Math.floor($worn.legs.reveal / 200))}`)>>
-			<<run _increaseAttractive.push(`멋진 레그웨어 ${"+".repeat(Math.floor($worn.legs.reveal / 200))}`)>>
+			<<run _increaseAllure.push(`Alluring legwear ${"+".repeat(Math.floor($worn.legs.reveal / 200))}`)>>
+			<<run _increaseAttractive.push(`Attractive legwear ${"+".repeat(Math.floor($worn.legs.reveal / 200))}`)>>
 		<</if>>
 		<<if $worn.feet.reveal gte 50>>
-			<<run _increaseAllure.push(`매혹적인 신발 ${"+".repeat(Math.floor($worn.feet.reveal / 200))}`)>>
-			<<run _increaseAttractive.push(`멋진 신발 ${"+".repeat(Math.floor($worn.feet.reveal / 200))}`)>>
+			<<run _increaseAllure.push(`Alluring shoes ${"+".repeat(Math.floor($worn.feet.reveal / 200))}`)>>
+			<<run _increaseAttractive.push(`Attractive shoes ${"+".repeat(Math.floor($worn.feet.reveal / 200))}`)>>
 		<</if>>
 		<<if Weather.dayState is "night">>
-			<<run _increaseAllure.push("밤")>>
+			<<run _increaseAllure.push("Night")>>
 		<</if>>
 		<<if $exposed gte 1>>
-			<<run _increaseAllure.push("노출")>>
+			<<run _increaseAllure.push("Exposed")>>
 		<</if>>
 		<<if $liquidcount gte 1>>
-			<<run _increaseAllure.push("정액 냄새")>>
+			<<run _increaseAllure.push("Smell of lewd fluids")>>
 		<</if>>
 		<<if $liquidcount gte 10>>
-			<<run _increaseAllure.push("정액에 뒤덮힘")>>
+			<<run _increaseAllure.push("Covered in lewd fluids")>>
 		<</if>>
 		<<if $liquidcount gte 30>>
-			<<run _increaseAllure.push("정액에 적셔짐")>>
+			<<run _increaseAllure.push("Drenched in lewd fluids")>>
 		<</if>>
 		<<if Time.isBloodMoon()>>
-			<<run _increaseAllure.push("보름달")>>
+			<<run _increaseAllure.push("Full moon")>>
 		<</if>>
 		<<if $auriga_scar gte 1>>
-			<<run _increaseAllure.push(`엘크 상처 ${"+".repeat($auriga_scar)}`)>>
+			<<run _increaseAllure.push(`Elk-scarred ${"+".repeat($auriga_scar)}`)>>
 		<</if>>
 		<<set _negLabels = [
-			{ threshold: 1000, class: "red", label: "악명 높은" },
-			{ threshold: 600, class: "pink", label: "유명한" },
-			{ threshold: 400, class: "purple", label: "잘 알려진" },
-			{ threshold: 200, class: "blue", label: "알려진" },
-			{ threshold: 100, class: "lblue", label: "약간 알려진" },
-			{ threshold: 30, class: "teal", label: "잘 알려지지 않은" }
+			{ threshold: 1000, class: "red", label: "Notorious" },
+			{ threshold: 600, class: "pink", label: "Famous" },
+			{ threshold: 400, class: "purple", label: "Recognised" },
+			{ threshold: 200, class: "blue", label: "Known" },
+			{ threshold: 100, class: "lblue", label: "Low-key" },
+			{ threshold: 30, class: "teal", label: "Obscure" }
 		]>>
 		<<set _posLabels = [
-			{ threshold: 1000, class: "green", label: "명성 자자한" },
-			{ threshold: 600, class: "teal", label: "유명한" },
-			{ threshold: 400, class: "lblue", label: "잘 알려진" },
-			{ threshold: 200, class: "blue", label: "알려진" },
-			{ threshold: 100, class: "purple", label: "약간 알려진" },
-			{ threshold: 30, class: "pink", label: "잘 알려지지 않은" }
+			{ threshold: 1000, class: "green", label: "Notorious" },
+			{ threshold: 600, class: "teal", label: "Famous" },
+			{ threshold: 400, class: "lblue", label: "Recognised" },
+			{ threshold: 200, class: "blue", label: "Known" },
+			{ threshold: 100, class: "purple", label: "Low-key" },
+			{ threshold: 30, class: "pink", label: "Obscure" }
 		]>>
 		<<set _neg = [
-			{ type: "sex", name: "걸레" },
-			{ type: "prostitution", name: "창녀" },
-			{ type: "rape", name: "육변기" },
-			{ type: "bestiality", name: $settings.bestialityEnabled ? "암캐" : "수간충" },
-			{ type: "exhibitionism", name: "과시자" },
-			{ type: "pregnancy", name: $fame.pregnancy gte 1000 ? "번식 엄마" : ($fame.pregnancy gte 400 ? "번식자" : "애엄마") },
-			{ type: "impreg", name: $fame.impreg gte 1000 ? "모두의 아버지" : ($fame.impreg gte 400 ? "아빠" : "씨돼지") },
+			{ type: "sex", name: "slut" },
+			{ type: "prostitution", name: "whore" },
+			{ type: "rape", name: "fucktoy" },
+			{ type: "bestiality", name: $settings.bestialityEnabled ? "bitch" : "monster fucker" },
+			{ type: "exhibitionism", name: "flaunter" },
+			{ type: "pregnancy", name: $fame.pregnancy gte 1000 ? "broodmother" : ($fame.pregnancy gte 400 ? "breeder" : "mother") },
+			{ type: "impreg", name: $fame.impreg gte 1000 ? "allfather" : ($fame.impreg gte 400 ? "sire" : "inseminator") },
 		]>>
 		<<set _pos = [
-			{ type: "scrap", name: "싸움꾼" },
-			{ type: "good", name: "박애주의자" },
-			{ type: "business", name: "사업가" },
-			{ type: "social", name: $fame.social gte 1000 ? "달변가" : "사교계 인사" },
-			{ type: "model", name: $fame.model gte 1000 ? "자랑꾼" : "모델" },
+			{ type: "scrap", name: "scrapper" },
+			{ type: "good", name: "do-gooder" },
+			{ type: "business", name: "entrepreneur" },
+			{ type: "social", name: $fame.social gte 1000 ? "schmoozer" : "socialite" },
+			{ type: "model", name: $fame.model gte 1000 ? "show off" : "model" },
 		]>>
 		<<set _decreaseAllure to _pos.some(fame => (_posLabels.some(status => $fame[fame.type] >= status.threshold)))>>
 
-		<div class="settingsHeader">매력</div>
+		<div class="settingsHeader">Attractiveness</div>
 		<div class="settingsToggleItemWide">
-			<i>매력</i>은 겉모습으로 인한 이점을 이용할 수 있는 능력을 나타냅니다.
+			<i>Attractiveness</i> measures your ability to use your looks to your advantage.
 			<br>
-			매력 점수:
+			Rating:
 			<<if $attractiveness gte 5000>>
 				<span class="green">S</span>
 			<<elseif $attractiveness gte 4000>>
@@ -426,7 +426,7 @@
 			<</if>>
 		</div>
 		<div class="settingsToggleItemWide">
-			<span class="gold bold">기여 요인:</span>
+			<span class="gold bold">Contributing Factors:</span>
 			<br>
 			<span class="green">
 				<<for _item range _increaseAttractive>>
@@ -438,29 +438,29 @@
 	</div>
 	<hr>
 	<div class="settingsGrid">
-		<div class="settingsHeader">색기</div>
+		<div class="settingsHeader">Allure</div>
 		<div class="settingsToggleItemWide">
-			<i>색기</i>는 매력의 어두운 면모로, 얼마나 많은 사람들이 당신을 범하고 싶어하는지를 나타냅니다.
+			<i>Allure</i> is the dark side of attractiveness and measures how much people will want to molest you.
 			<br>
-			색기:
+			Currently:
 			<<if $allure gte 6000 * $settings.allureModifier>>
-				<span class="red">금방이라도 유린당할 것처럼 보인다.</span>
+				<span class="red">You look like you need to be ravaged.</span>
 			<<elseif $allure gte 4000 * $settings.allureModifier>>
-				<span class="pink">당신은 변태처럼 보인다.</span>
+				<span class="pink">You look perverted.</span>
 			<<elseif $allure gte 3000 * $settings.allureModifier>>
-				<span class="purple">당신은 음란하게 보인다.</span>
+				<span class="purple">You look lewd.</span>
 			<<elseif $allure gte 2000 * $settings.allureModifier>>
-				<span class="blue">당신은 돋보인다.</span>
+				<span class="blue">You stand out.</span>
 			<<elseif $allure gte 1500 * $settings.allureModifier>>
-				<span class="lblue">당신은 주의를 끌고 있다.</span>
+				<span class="lblue">You attract attention.</span>
 			<<elseif $allure gte 1000 * $settings.allureModifier>>
-				<span class="teal">사람들이 당신에게 시선을 던지곤 한다.</span>
+				<span class="teal">You attract glances.</span>
 			<<else>>
-				<span class="green">당신은 지극히 평범하다.</span>
+				<span class="green">You look unremarkable.</span>
 			<</if>>
 		</div>
 		<div @class="_decreaseAllure ? 'settingsToggleItem' : 'settingsToggleItemWide'">
-			<span class="gold bold">기여 요인:</span>
+			<span class="gold bold">Increasing Allure:</span>
 			<br>
 			<span class="red">
 				<<for _item range _increaseAllure>>
@@ -472,7 +472,7 @@
 				<<for _fame range _neg>>
 					<<set _famous = _negLabels.find(status => $fame[_fame.type] >= status.threshold)>>
 					<<if _famous>>
-						<span @class="_famous.class">명성: <<= _famous.label>> <<= _fame.name>> <<= "+".repeat([30, 100, 200, 400, 600, 1000].indexOf(_famous.threshold))>></span>
+						<span @class="_famous.class">Fame: <<= _famous.label>> <<= _fame.name>> <<= "+".repeat([30, 100, 200, 400, 600, 1000].indexOf(_famous.threshold))>></span>
 						<br>
 					<</if>>
 				<</for>>
@@ -480,13 +480,13 @@
 		</div>
 		<<if _decreaseAllure>>
 			<div class="settingsToggleItem">
-				<span class="gold bold">감소 요인:</span>
+				<span class="gold bold">Decreasing Allure:</span>
 				<br>
 				<<if !["island"].includes("location")>>
 					<<for _fame range _pos>>
 						<<set _famous = _posLabels.find(status => $fame[_fame.type] >= status.threshold)>>
 						<<if _famous>>
-							<span @class="_famous.class">명성: <<= _famous.label>> <<= _fame.name>> <<= "+".repeat([30, 100, 200, 400, 600, 1000].indexOf(_famous.threshold))>></span>
+							<span @class="_famous.class">Fame: <<= _famous.label>> <<= _fame.name>> <<= "+".repeat([30, 100, 200, 400, 600, 1000].indexOf(_famous.threshold))>></span>
 							<br>
 						<</if>>
 					<</for>>
@@ -504,7 +504,7 @@
 <</widget>>
 
 <<widget "mirrorAppearancePregnancy">>
-	당신은 <span class="lewd">임신한 소녀처럼 보인다...</span>
+	You look like a <span class="lewd">pregnant <<girl>>...</span>
 	<<if !$hourly.mirrorPregArousal>>
 		<<set $hourly.mirrorPregArousal to true>>
 		<<garousal>><<gstress>><<arousal 300>><<stress 10>>
@@ -513,9 +513,9 @@
 
 	<<if getPregnancyObject().potentialFathers.length is 1>>
 		<<set $_fatherName to pregnancyNameCorrection(getPregnancyObject().potentialFathers[0].source)>>
-		<span class="lewd">아기 아빠는 <<print $_fatherName === "당신 자신" ? "당신이" : $_fatherName + "임이">> 확실하다.</span>
+		<span class="lewd">It's clear that <<print $_fatherName === "yourself" ? "you are" : $_fatherName + " is">> the father.</span>
 	<<else>>
-		<span class="red">당신은 누가 아기 아빠일지 궁금해한다.</span>
+		<span class="red">You wonder who the father is.</span>
 	<</if>>
 	<<set getPregnancyObject().awareOf to "mirror">>
 <</widget>>
@@ -524,6 +524,8 @@
 	<<set _array to _args[0] is "visible" ? _skin_array : _hidden_writing>>
 	<<for _index, _active_bodypart range _array>>
 		<<if $skin[_active_bodypart].writing>>
+			<<silently>><<bodypart _active_bodypart>><</silently>>
+			<<= _text_output.toUpperFirst()>>:
 			<<if isLoveInterest($skin[_active_bodypart].special)>>
 				<<set _colour to "lewd">>
 			<<elseif $skin[_active_bodypart].special isnot "none">>
@@ -538,32 +540,26 @@
 				"<span @class="_colour"><<= $skin[_active_bodypart].writing.toUpperFirst()>></span>"
 			<<else>>
 				<<set _written to "drawn">>
-				<span @class="_colour"><<= $skin[_active_bodypart].writing>> 그림</span>
+				A picture of a <span @class="_colour"><<= $skin[_active_bodypart].writing>></span>
 			<</if>>
 			<<if $skin[_active_bodypart].arrow is 1>>
 				<<if _active_bodypart is "left_cheek" or _active_bodypart is "right_cheek">>
-					문구와 당신의 입을 가리키는 화살표
+					and an arrow pointing to your mouth
 				<<elseif _active_bodypart is "left_bottom" or _active_bodypart is "right_bottom" or _active_bodypart is "back">>
-					문구와 당신의 엉덩이를 가리키는 화살표
+					and an arrow pointing to your anus
 				<<elseif _active_bodypart is "pubic" or _active_bodypart is "left_thigh" or _active_bodypart is "right_thigh">>
-					문구와 당신의 음부를 가리키는 화살표
+					and an arrow pointing to your <<genitals true>>
 				<</if>>
 			<</if>>
 			<<switch $skin[_active_bodypart].pen>>
 				<<case "marker">>
-					(유성펜으로 쓰여짐)
+					(_written in permanent marker)
 				<<case "magic">>
-					(<span class="pink">인장으로 새겨짐</span>)
-				<<case "tattoo">>
-					(<span class="red">문신으로 새겨짐</span>)
-				<<case "brand">>
-					(<span class="red">낙인으로 새겨짐</span>)
-				<<case "lipstick">>
-					(립스틱으로 쓰여짐)
-				<<case "mud">>
-					(진흙으로 쓰여짐)
+					(<span class="pink">seal</span>)
+				<<case "tattoo" "brand">>
+					(<span class="red"><<= $skin[_active_bodypart].pen>></span>)
 				<<default>>
-					(평범한 펜으로 쓰여짐)
+					(_written in <<= $skin[_active_bodypart].pen>>)
 			<</switch>>
 			<<= _index lt _array.length - 1 ? "<br>" : "">>
 		<</if>>
@@ -571,7 +567,7 @@
 <</widget>>
 
 <<widget "visual-settings">>
-	<<mirroricon>><<link "뒤로">><<replace #mirror>><<mirrorMenu>><</replace>><<numberify "#passages > .passage">><<unset $mirrorMenu>><</link>>
+	<<mirroricon>><<link "Back">><<replace #mirror>><<mirrorMenu>><</replace>><<numberify "#passages > .passage">><<unset $mirrorMenu>><</link>>
 <</widget>>
 
 <<widget "faceStyleOptions">>
@@ -614,13 +610,13 @@
 <</widget>>
 
 <<widget "mirrorSkin">>
-	<<mirroricon>><<link "뒤로">><<handheldon>><<updatesidebarimg>><<replace #mirror>><<mirrorMenu>><</replace>><<numberify "#passages > .passage">><<unset $mirrorMenu>><</link>>
+	<<mirroricon>><<link "Back">><<handheldon>><<updatesidebarimg>><<replace #mirror>><<mirrorMenu>><</replace>><<numberify "#passages > .passage">><<unset $mirrorMenu>><</link>>
 	<br><br>
 
 	<div class="settingsGrid">
-		<div class="settingsHeader">피부</div>
+		<div class="settingsHeader">Skin</div>
 		<div class="settingsToggleItem">
-			<span class="gold bold">선탠:</span>
+			<span class="gold bold">Tanning:</span>
 			<br>
 			<span id="sunscreenDescription">
 				<<sunscreenDesc>>
@@ -630,31 +626,31 @@
 			</span>
 			<br>
 			<label data-target="options.images" data-disabledif="V.options.images===0">
-				<<checkbox "$options.tanLines" false true autocheck>> 의상으로 인한 태닝 라인 활성화
+				<<checkbox "$options.tanLines" false true autocheck>> Enable tanning lines from clothing
 			</label>
-			<mouse class="tooltip-small linkBlue">(?)<span>태닝 라인이 시각적으로 보이는 것을 비활성화합니다. 사이드바에서만 적용됩니다.</span></mouse>
+			<mouse class="tooltip-small linkBlue">(?)<span>Disables the visual aspect of tanning lines. Only for sidebar.</span></mouse>
 		</div>
 		<div class="settingsToggleItem">
-			<span class="gold bold">피부에 묻어있는 액체:</span>
+			<span class="gold bold">Body Liquids:</span>
 			<<if $liquidcount gt 0>>
-				<<mirrorwet "목" $player.bodyliquid.neck.semen $player.bodyliquid.neck.goo $player.bodyliquid.neck.nectar>>
-				<<mirrorwet "오른쪽 팔" $player.bodyliquid.rightarm.semen $player.bodyliquid.rightarm.goo $player.bodyliquid.rightarm.nectar>>
-				<<mirrorwet "왼쪽 팔" $player.bodyliquid.leftarm.semen $player.bodyliquid.leftarm.goo $player.bodyliquid.leftarm.nectar>>
-				<<mirrorwet "허벅지" $player.bodyliquid.thigh.semen $player.bodyliquid.thigh.goo $player.bodyliquid.thigh.nectar>>
-				<<mirrorwet "엉덩이" $player.bodyliquid.bottom.semen $player.bodyliquid.bottom.goo $player.bodyliquid.bottom.nectar>>
-				<<mirrorwet "배" $player.bodyliquid.tummy.semen $player.bodyliquid.tummy.goo $player.bodyliquid.tummy.nectar>>
-				<<mirrorwet "가슴" $player.bodyliquid.chest.semen $player.bodyliquid.chest.goo $player.bodyliquid.chest.nectar>>
-				<<mirrorwet "얼굴" $player.bodyliquid.face.semen $player.bodyliquid.face.goo $player.bodyliquid.face.nectar>>
-				<<mirrorwet "머리카락" $player.bodyliquid.hair.semen $player.bodyliquid.hair.goo $player.bodyliquid.hair.nectar>>
-				<<mirrorwet "발" $player.bodyliquid.feet.semen $player.bodyliquid.feet.goo $player.bodyliquid.feet.nectar>>
-				<<mirrorwet "음순" $player.bodyliquid.vaginaoutside.semen $player.bodyliquid.vaginaoutside.goo $player.bodyliquid.vaginaoutside.nectar>>
-				<<mirrorwet "질" $player.bodyliquid.vagina.semen $player.bodyliquid.vagina.goo $player.bodyliquid.vagina.nectar>>
-				<<mirrorwet "페니스" $player.bodyliquid.penis.semen $player.bodyliquid.penis.goo $player.bodyliquid.penis.nectar>>
-				<<mirrorwet "엉덩이" $player.bodyliquid.anus.semen $player.bodyliquid.anus.goo $player.bodyliquid.anus.nectar>>
-				<<mirrorwet "입" $player.bodyliquid.mouth.semen $player.bodyliquid.mouth.goo $player.bodyliquid.mouth.nectar>>
+				<<mirrorwet "neck" $player.bodyliquid.neck.semen $player.bodyliquid.neck.goo $player.bodyliquid.neck.nectar>>
+				<<mirrorwet "right arm" $player.bodyliquid.rightarm.semen $player.bodyliquid.rightarm.goo $player.bodyliquid.rightarm.nectar>>
+				<<mirrorwet "left arm" $player.bodyliquid.leftarm.semen $player.bodyliquid.leftarm.goo $player.bodyliquid.leftarm.nectar>>
+				<<mirrorwet "thighs" $player.bodyliquid.thigh.semen $player.bodyliquid.thigh.goo $player.bodyliquid.thigh.nectar>>
+				<<mirrorwet "bottom" $player.bodyliquid.bottom.semen $player.bodyliquid.bottom.goo $player.bodyliquid.bottom.nectar>>
+				<<mirrorwet "tummy" $player.bodyliquid.tummy.semen $player.bodyliquid.tummy.goo $player.bodyliquid.tummy.nectar>>
+				<<mirrorwet "chest" $player.bodyliquid.chest.semen $player.bodyliquid.chest.goo $player.bodyliquid.chest.nectar>>
+				<<mirrorwet "face" $player.bodyliquid.face.semen $player.bodyliquid.face.goo $player.bodyliquid.face.nectar>>
+				<<mirrorwet "hair" $player.bodyliquid.hair.semen $player.bodyliquid.hair.goo $player.bodyliquid.hair.nectar>>
+				<<mirrorwet "feet" $player.bodyliquid.feet.semen $player.bodyliquid.feet.goo $player.bodyliquid.feet.nectar>>
+				<<mirrorwet "labia" $player.bodyliquid.vaginaoutside.semen $player.bodyliquid.vaginaoutside.goo $player.bodyliquid.vaginaoutside.nectar>>
+				<<mirrorwet "vagina" $player.bodyliquid.vagina.semen $player.bodyliquid.vagina.goo $player.bodyliquid.vagina.nectar>>
+				<<mirrorwet "penis" $player.bodyliquid.penis.semen $player.bodyliquid.penis.goo $player.bodyliquid.penis.nectar>>
+				<<mirrorwet "anus" $player.bodyliquid.anus.semen $player.bodyliquid.anus.goo $player.bodyliquid.anus.nectar>>
+				<<mirrorwet "mouth" $player.bodyliquid.mouth.semen $player.bodyliquid.mouth.goo $player.bodyliquid.mouth.nectar>>
 			<<else>>
 				<br>
-				당신의 피부는 <span class="green">깨끗하다</span>.
+				Your skin feels <span class="green">clean</span>.
 			<</if>>
 
 		</div>
@@ -663,16 +659,16 @@
 	<div class="settingsGrid">
 		<<bodywritingExposureCheck true true>>
 		<<bodywritingHiddenCheck true true>>
-		<div class="settingsHeader">몸</div>
+		<div class="settingsHeader">Body</div>
 		<<if _bodywriting_exposed is 1 and _bodywriting_hidden is 1>>
 			<div class="settingsToggleItem">
-				<span class="gold bold">드러난 신체 낙서:</span>
+				<span class="gold bold">Visible Bodywriting:</span>
 				<br>
 				<<mirrorBodywriting "visible">>
 				<br>
 			</div>
 			<div class="settingsToggleItem">
-				<span class="gold bold">숨겨진 신체 낙서:</span>
+				<span class="gold bold">Hidden Bodywriting:</span>
 				<br>
 				<<mirrorBodywriting "hidden">>
 				<br>
@@ -680,12 +676,12 @@
 		<<elseif _bodywriting_exposed is 1 || _bodywriting_hidden is 1>>
 			<div class="settingsToggleItemWide">
 				<<if _bodywriting_exposed is 1>>
-					<span class="gold bold">드러난 신체 낙서:</span>
+					<span class="gold bold">Visible Bodywriting:</span>
 					<br>
 					<<mirrorBodywriting "visible">>
 					<br>
 				<<elseif _bodywriting_hidden is 1>>
-					<span class="gold bold">숨겨진 신체 낙서:</span>
+					<span class="gold bold">Hidden Bodywriting:</span>
 					<br>
 					<<mirrorBodywriting "hidden">>
 					<br>
@@ -698,17 +694,17 @@
 				<<unset $bodyWritingSelected>>
 			<</if>>
 			<<if $bodyWritingSelected isnot undefined>>
-				당신은
+				You write
 				<<if isLoveInterest($skin[$bodyPartSelected].special)>>
-					"<span class="lewd"><<print $bodyWritingSelected>></span>"라고
+					"<span class="lewd"><<print $bodyWritingSelected>></span>"
 				<<elseif $skin[$bodyPartSelected].special isnot "none">>
-					"<span class="red"><<print $bodyWritingSelected>></span>"라고
+					"<span class="red"><<print $bodyWritingSelected>></span>"
 				<<elseif $skin[$bodyPartSelected].lewd is 1>>
-					"<span class="pink"><<print $bodyWritingSelected>></span>"라고
+					"<span class="pink"><<print $bodyWritingSelected>></span>"
 				<<else>>
-					"<span class="purple"><<print $bodyWritingSelected>></span>"라고
+					"<span class="purple"><<print $bodyWritingSelected>></span>"
 				<</if>>
-				쓴다.
+				on your <<bodypart $bodyPartSelected>>.
 				<<unset $bodyWritingSelected>>
 				<<unset $bodyPartSelected>>
 				<hr>
@@ -722,10 +718,10 @@
 			</div>
 		</div>
 		<div class="settingsToggleItemWide">
-			<span class="gold bold">체형:</span>
-			<mouse class="tooltip-small linkBlue">(?)<span>외관에 대한 것으로, 성별에 따른 외형 변화와는 무관합니다.</span></mouse>
+			<span class="gold bold">Body shape:</span>
+			<mouse class="tooltip-small linkBlue">(?)<span>This is a cosmetic change that does not contribute towards gender appearance.</span></mouse>
 			<br>
-			현재 당신의 체형:
+			Your chosen body shape is:
 			<span class="capitalize">
 				<<listbox "$player.bodyshape" autoselect>>
 					<<optionsfrom setup.bodyShapes>>
@@ -742,16 +738,16 @@
 	<hr>
 	<div class="settingsGrid">
 
-		<div class="settingsHeader">얼굴 설정</div>
+		<div class="settingsHeader">Facial Settings</div>
 		<<if setup.faceStyleOptions.length gt 1>>
 			<div id="visualsFaceStyle" class="settingsToggleItem">
-				<span class="gold bold">얼굴 스타일:</span><br>
+				<span class="gold bold">Face style:</span><br>
 				<<faceStyleOptions>>
 			</div>
 		<</if>>
 
 		<div id="visualsFaceVariants" @class="setup.faceStyleOptions.length gt 1 ? 'settingsToggleItem' : 'settingsToggleItemWide'">
-			<span class="gold bold">분위기:</span>
+			<span class="gold bold">Demeanour:</span>
 			<br>
 			<div id="visualsFaceVariantRadios">
 				<<faceVariantOptions>>
@@ -789,15 +785,15 @@
 <</widget>>
 
 <<widget "sunscreenDesc">>
-	당신의 피부는
+	Your skin is
 	<<if Skin.Sunscreen.isApplied()>>
 		<mouse class = "gold tooltip-small" style="border-bottom-color:white">
-			태양빛으로부터 보호받고 있다.
+			protected against the sun
 			<span class="black">
-				선크림이 당신의 피부가 타는 것을 막아주고 있다.
+				Sunscreen is keeping your skin from getting tanned.
 				<<if Skin.Sunscreen.usesLeft is 0>>
 					<br>
-					<i class="blue">선크림은 화장품 가게에서 구매할 수 있다.</i>
+					<i class="blue">Sunscreen can be acquired at the shops</i>
 				<</if>>
 			</span>
 		</mouse>
@@ -805,12 +801,12 @@
 		(<<print getTimeString($_timeLeft)>> left).
 	<<else>>
 		<mouse class = "gold tooltip-small" style="border-bottom-color:white">
-			태양빛으로부터 보호받지 못하고 있다.
+			not protected against the sun.
 			<span class="black">
-				당신의 피부는 태양빛에 노출되면 타게 될 것이다.
+				Your skin will tan when exposed to the sun.
 				<<if Skin.Sunscreen.usesLeft is 0>>
 					<br>
-					<i class="blue">선크림은 화장품 가게에서 구매할 수 있다.</i>
+					<i class="blue">Sunscreen can be acquired at the cosmetics shop</i>
 				<</if>>
 			</span>
 		</mouse>
@@ -1377,7 +1373,7 @@
 <</widget>>
 
 <<widget "mirrorHair">>
-	<<mirroricon>><<link "뒤로">><<handheldon>><<updatesidebarimg>><<replace #mirror>><<mirrorMenu>><</replace>><<numberify "#passages > .passage">><<unset $mirrorMenu>><</link>>
+	<<mirroricon>><<link "Back">><<handheldon>><<updatesidebarimg>><<replace #mirror>><<mirrorMenu>><</replace>><<numberify "#passages > .passage">><<unset $mirrorMenu>><</link>>
 	<<shopClothingFilterSettingsDefault>> /* Due to reusing the traits filtering */
 	<br><br>
 	<div id="hairDescription">
@@ -1891,7 +1887,7 @@
 <</widget>>
 
 <<widget "mirrorMakeup">>
-	<<mirroricon>><<link "뒤로">><<replace #mirror>><<mirrorMenu>><</replace>><<numberify "#passages > .passage">><<unset $mirrorMenu>><</link>>
+	<<mirroricon>><<link "Back">><<replace #mirror>><<mirrorMenu>><</replace>><<numberify "#passages > .passage">><<unset $mirrorMenu>><</link>>
 	<br><br>
 	<div class="settingsGrid">
 		<div class="settingsHeader">Makeup</div>
@@ -2277,7 +2273,7 @@
 <</widget>>
 
 <<widget "mirrorTransformation">>
-	<<mirroricon>><<link "뒤로">><<replace #mirror>><<mirrorMenu>><</replace>><<numberify "#passages > .passage">><<unset $mirrorMenu>><</link>>
+	<<mirroricon>><<link "Back">><<replace #mirror>><<mirrorMenu>><</replace>><<numberify "#passages > .passage">><<unset $mirrorMenu>><</link>>
 	<<set _angel to $transformationParts.angel>>
 	<<set _fallen to $transformationParts.fallenAngel>>
 	<<set _demon to $transformationParts.demon>>
