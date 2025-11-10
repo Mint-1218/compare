@@ -10,31 +10,31 @@
 
 <<widget "catacombs_torch_text">>
 	<<if $catacombs_torch gte 100>>
-		당신의 횃불이 <span class="green">밝게 빛난다.</span> <<set Weather.Temperature.override.increase.inside(5, "불타오르는 횃불이 뜨겁다.")>>
+		Your torch is <span class="green">radiant.</span> <<set Weather.Temperature.override.increase.inside(5, "The burning torch is hot.")>>
 	<<elseif $catacombs_torch gte 80>>
-		당신의 횃불이 <span class="teal">활활 타오른다.</span> <<set Weather.Temperature.override.increase.inside(5, "불타오르는 횃불이 뜨겁다.")>>
+		Your torch <span class="teal">blazes.</span> <<set Weather.Temperature.override.increase.inside(5, "The burning torch is hot.")>>
 	<<elseif $catacombs_torch gte 60>>
-		당신의 횃불 불꽃이 <span class="lblue">약간 활기를 잃었다.</span> <<set Weather.Temperature.override.increase.inside(3, "횃불의 점점 작아지는 불길이 따뜻하다.")>>
+		The flame on your torch has <span class="lblue">lost some of its vigour.</span> <<set Weather.Temperature.override.increase.inside(3, "The waning fire of your torch is warm.")>>
 	<<elseif $catacombs_torch gte 40>>
-		당신의 횃불이 <span class="blue">약하게 타오른다.</span><<set Weather.Temperature.override.increase.inside(1, "횃불의 약해진 불길이 살짝 따뜻하다.")>>
+		Your torch is <span class="blue">burning lower.</span><<set Weather.Temperature.override.increase.inside(1, "The dim fire of your torch is slightly warm.")>>
 	<<elseif $catacombs_torch gte 20>>
-		당신의 횃불이 <span class="purple">오래 유지될 것 같지 않다.</span>
+		Your torch <span class="purple">won't last much longer.</span>
 	<<elseif $catacombs_torch gte 1>>
-		간신히 <span class="pink">깜빡거리는</span> 불빛만이 당신의 횃불에 남아있다.
+		Barely a <span class="pink">flicker</span> of fire remains on your torch.
 	<<else>>
-		당신의 횃불은 <span class="black">꺼져 있다.</span>
+		Your torch is <span class="black">extinguished.</span>
 	<</if>>
 <</widget>>
 
 <<widget "gtorch">>
-	<<if $statdisable is "f">> |
-		<span class="green">+ 불빛</span>
+	<<if !$settings.blindStatsEnabled>> |
+		<span class="green">+ Torchlight</span>
 	<</if>>
 <</widget>>
 
 <<widget "ltorch">>
-	<<if $catacombs_torch gte 1 and $statdisable is "f">> |
-		<span class="red">- 불빛</span>
+	<<if $catacombs_torch gte 1 and !$settings.blindStatsEnabled>> |
+		<span class="red">- Torchlight</span>
 	<</if>>
 <</widget>>
 
@@ -50,19 +50,19 @@
 	<<if _args[0] is "normal">>
 		<<addinlineevent "catacombs_normal_1" 1>>
 			<<if $catacombs_torch gte random(1, 100)>>
-				앞쪽에는 무릎 높이로 밧줄이 설치되어 있다. <span class="green">당신은 그것을 밟는다.</span>
+				A rope hangs at knee height up ahead. <span class="green">You step over it.</span>
 				<br><br>
 
 				<<destination_catacombs skip>>
 			<<else>>
-				당신은 무언가가 무릎에 스치는 것을 느낀다. 해치가 쿵 하고 열리고, 어둠 속에서 다트가 날아온다. <span class="red">그것은 당신의 팔에 맞는다.</span> 당신은 바로 다트를 제거하지만, <span class="lewd">맞은 지점에서부터 온기가 퍼진다.</span>
+				You feel something brush against your knee. A hatch thuds open, and a dart flies from the dark. <span class="red">It catches your arm.</span> You remove it at once, <span class="lewd">but a warmth spreads from the point of impact.</span><<drugs 40>><<gdrugged>>
 				<br><br>
 
-				당신은 다트를 조사한다.
-				<<if currentSkillValue("history") gte 1000 and ($leftarm isnot "bound" or $rightarm isnot "bound")>>
-					그것은 중세의 것 처럼 보이고, 당신은 위쪽을 더 자세히 살펴본다. 그것은 강철로 만들어졌다. 당신은 그것을 흔들어본다. 액체가 안에 있다. 그렇게 많이 남지는 않았지만, 범죄와 관련 있는 사람들에게는 약간의 가치가 있을지도 모른다.<<set $blackmoney += 10>>
+				You examine the dart.
+				<<if currentSkillValue("history") gte 1000 and !pcAreArmsBound("both")>>
+					It seems medieval, until you examine the top more closely. It's made of steel. You give it a shake. There's fluid inside. There's not much here, but it might be worth a little to someone with criminal connections.<<set $blackmoney += 10>>
 				<<else>>
-					그것은 오래된 것 처럼 보인다.
+					It seems old.
 				<</if>>
 				<br><br>
 
@@ -71,19 +71,19 @@
 		<</addinlineevent>>
 		<<addinlineevent "catacombs_normal_2" 1>>
 			<<if $catacombs_torch gte random(1, 100)>>
-				앞쪽에 있는 석판이 다른 석판보다 더 높이 솟아 있다. <span class="green">당신은 그것을 밟는다.</span>
+				A stone slab up ahead is raised higher than the others. <span class="green">You step over it.</span>
 				<br><br>
 
 				<<destination_catacombs skip>>
 			<<else>>
 				<<if random(1, 4) is 4 and !$worn.feet.type.includes("shackle")>>
-					당신은 석판이 발 밑에서 무너지는 것을 느낀다. 지면이 떨리고, <span class="red">철제 족쇄 한 쌍이 당신의 발목을 감싼다.</span> 그것은 쇠사슬로 지면에 연결되어 있지만, 금속이 녹슬어 약간의 힘으로도 부서진다. 그것들을 연결하는 사슬이 더 튼튼하다는 것이 확실하다. 
+					You feel a stone slab give way underfoot. The ground trembles, <span class="red">and a set of iron cuffs clamp around your ankles.</span> They're connected to the ground by a chain, but the metal is so rusty that it crumbles at a little force. The chain connecting them proves sturdier.
 					<<shackle_feet>>
 					<br><br>
 
 					<<destination_catacombs skip>>
 				<<else>>
-					당신은 석판이 발밑에서 무너지는 것을 느낀다. 먼지가 당신을 뒤덮고, 패들이 천장의 오목한 곳에서 아래로 휘둘러져, <span class="red"> 당신의 <<bottom_ ul>> 때린다.</span><<gpain>><<pain 4>><<gtrauma>><<trauma 6>><<gstress>><<stress 6>>
+					You feel a stone slab give way underfoot. Dust showers you, and a paddle swings down from a recess in the ceiling, <span class="red">smacking your <<bottom>>.</span><<gpain>><<pain 4>><<gtrauma>><<trauma 6>><<gstress>><<stress 6>>
 					<br><br>
 
 					<<destination_catacombs skip>>
@@ -93,20 +93,20 @@
 	<</if>>
 	<<if _args[0] is "barrow">>
 		<<addinlineevent "catacombs_barrow_1" 1>>
-			당신은 어둠 속에서 움직이는 소리를 듣는다. 앞에 무언가가 있고, 점점 가까워진다. 당신 뒤에도 무언가가 있다. 그리고 측면에도. 모든 것이 가까워지고 있다.
+			You hear movement in the dark. There's something ahead, drawing closer. There's something behind you as well. And to the side. All drawing closer.
 			<br><br>
 
 			<<if $catacombs_torch gte random(1, 100)>>
-				당신은 빙글빙글 돌면서, 당신의 횃불을 생물체들에게 휘두른다. <span class="green">횃불의 빛과 열은 그들을 물러나게 한다.</span> 그들은 깊숙한 곳으로 도망친다.
+				You whirl around, waving your torch at the creatures. <span class="green">Its light and heat keeps them at bay.</span> They flee into deep recesses.
 				<br><br>
 
 				<<destination_catacombs skip>>
 			<<else>>
-				<<if $lurkerdisable is "f">>
-					<<link [[다음|Catacombs Struggle]]>><<set $struggle_start to 1>><</link>>
+				<<if $settings.lurkersEnabled>>
+					<<link [[Next|Catacombs Struggle]]>><<set $struggle_start to 1>><</link>>
 					<br>
 				<<else>>
-					당신은 어둠 속을 뚫고, 한 번 이상 비틀거리면서, 이상한 생물체들에게서 멀어질때까지 달린다. 당신은 도망쳤지만, 상처 없이 도망치지는 못했다.<<beastescape>>
+					You run through the dark, stumbling more than once, until you leave the creatures far behind. You got away, but not unscathed.<<beastescape>>
 					<br><br>
 
 					<<destination_catacombs skip>>
@@ -114,30 +114,30 @@
 			<</if>>
 		<</addinlineevent>>
 		<<addinlineevent "catacombs_barrow_2" 1>>
-			당신은 하얀 액체가 담긴 웅덩이에 다다른다. 그것이 통로를 막고 있어, 다른 길을 찾는 것은 힘들 수도 있다.
+			You come to a pool of white fluid. It blocks the passage, and finding another way around might be arduous.
 			<br><br>
 
 			<<if $catacombs_torch gte random(1, 100)>>
-				당신은 횃불을 들어 올리고, <span class="green">액체에서 튀어나온 벽돌 덩어리 몇 개를 발견한다.</span> 가장 가까운 곳에 올라가서, 떨어지지 않도록 조심하면서, 튀어나온 벽돌들을 이용해서 웅덩이를 횡단한다.
+				You hold out your torch, <span class="green">and spot a few chunks of masonry jutting from the fluid.</span> You climb the closest and use them to traverse the pool, careful not to fall.
 				<br><br>
 
 				<<destination_catacombs skip>>
 			<<else>>
-				당신은 유심히 들여다보지만, <span class="red">도움이 될만한 것을 발견할 수 없었다.</span>
+				You peer across, <span class="red">but can see nothing that would help you.</span>
 				<br><br>
 
-				<<link [[다른 길을 찾는다|Catacombs Goop Find]]>><<catacombs_torch -5>><<pass 10>><</link>><<ltorch>>
+				<<link [[Find another path|Catacombs Goop Find]]>><<catacombs_torch -5>><<pass 10>><</link>><<ltorch>>
 				<br>
-				<<link [[웅덩이를 헤치며 건넌다|Catacombs Goop Wade]]>><</link>><<note "끈적거림" "pink">>
+				<<link [[Wade across|Catacombs Goop Wade]]>><</link>><<note "Goopy" "pink">>
 				<br>
 			<</if>>
 
 		<</addinlineevent>>
 		<<addinlineevent "catacombs_barrow_3" 1>>
 			<<if $catacombs_torch gte random(1, 100)>>
-				저 멀리, 보석들이 동굴 천장에서 반짝인다. 방향을 잡는 데 도움이 된다.<<lstress>><<stress -6>>
+				Gems glitter in the cavern ceiling, far above. They help orient you.<<lstress>><<stress -6>>
 			<<else>>
-				당신 주위의 벽은 저 위의 동굴로 쭉 뻗어 있다.
+				The walls around you stretch into the cavern above.
 			<</if>>
 			<br><br>
 
@@ -148,85 +148,84 @@
 		<<addinlineevent "catacombs_compound_1" 1>>
 			<<generate1>><<generate2>>
 			<<person1>>
-			앞쪽에서 한 쌍의 목소리가 들린다.
+			You hear a pair of voices up ahead.
 			<br><br>
 
 			<<rng 5>>
 			<<if $rng is 5>>
-				"나는 다른 데서 일하고 싶다고 했는데," <<person_ ga>> 말한다.
+				"I've requested a transfer," says a <<person>>.
 				<br>
-				"이 아래에서 일하기엔 좀 으스스하지, 안그래?" <<person2>><<person_ i>> 웃는다.
+				"Too spooky for you down here, aye?" laughs the <<person2>><<person>>.
 				<br>
-				"윽! 거미다. 저건 좋아할 수가 없어."
+				"Oi! It's the spiders. Never liked em."
 			<<elseif $rng is 4>>
-				"등 뒤에!" <<person_ ga>> 소리친다.
+				"Behind you!" shouts a <<person>>.
 				<br>
-				"씨발!" <<person2>><<person_ i>> 깜짝 놀라 비명지르며, 놀라서 돌아선다.
+				"Fuck!" cries a <<person2>><<person>> in shock, turning with a start.
 				<br>
-				"장난삼아 놀린건데." <<person1>><<Hes_ nun>> 한대 맞는다.
+				"Made you look." <<person1>><<Hes>> rewarded with a thump.
 			<<elseif $rng is 3>>
-				"도대체 그들은 왜 이 모든 케이블들이 필요한건데?" <<person_ i>> 묻는다.
+				"What they need all these cables for anyway?" asks a <<person>>
 				<br>
-				"몰라, 그리고 신경 안 써." <<person2>><<person_ i>> 대답한다.
+				"Don't know, and don't care to," replies a <<person2>><<person>>.
 				<br>
-				"내 생각엔, 아는게 적을수록 좋을걸."
+				"Less we know the better, I suppose."
 			<<elseif $rng is 2>>
-				"여기 아래에 무언가 가치 있는게 있을 거 같아?" <<person_ ga>> 묻는다.
+				"Think there's anything valuable down here?" asks a <<person>>.
 				<br>
-				"아니," <<person2>><<person_ i>> 대답한다. "우리가 넣은 것들 외엔 없을 것 같은데. 그리고 우린 그것들을 훔쳐갈 수도 없고."
+				"Nah," replies a <<person2>><<person>>. "Other than the stuff we put in. And we wouldn't get away with pinching that."
 				<br>
-				"있었어도 아마 오래 전에 약탈당했을 거야."
+				"Probably looted a long time ago anyway."
 			<<else>>
-				"쓸데없이 돌아다니지 마," <<person_ ga>> 말한다.
+				"Don't go wandering," says a <<person>>.
 				<br>
-				"왜 안되는데?" <<person2>><<person_ i>> 반문한다. "어둠은 나를 겁주지 못해."
+				"Why not?" asks a <<person2>><<person>>. "The dark don't scare me."
 				<br>
-				"어둠을 말하는 게 아니야. 그 안에 있는 것을 말하는 거지."
+				"It's not the dark. It's what's in it."
 			<</if>>
 			<br><br>
 
 			<<if $catacombs_torch gte 1>>
-				그들은 제복을 입고 있지만, 어둠 속에서는 세세한 것을 알 수 없다.
-				<br><br>
+				They're wearing uniforms, but you can't make out the detail in the gloom.
 			<</if>>
 
 			<<if $catacombs_torch gte random(1, 100)>>
-				그들은 당신을 눈치채지 못한다. <span class="green">당신은 몰래 빠져나간다.</span>
+				They haven't noticed you. <span class="green">You sneak away.</span>
 				<br><br>
 
 				<<endevent>>
 				<<destination_catacombs skip>>
 			<<else>>
-				그들은 당신을 눈치채지 못했지만, 당신을 바로 다음 발걸음이 <span class="red">발 밑의 부서진 그릇을 밟는다.</span> 그들의 고개가 당신 쪽으로 돌아간다.
+				They haven't noticed you, but with your very next step <span class="red">you crunch broken crockery underfoot.</span> Their heads swivel your way.
 				<br><br>
 
-				"살아 있는 사람이네." <<person1>><<person_ i>> 말한다. 그들이 가까이 다가온다. "가만히 있어, <<girl_ a>>."
+				"Got ourselves a live one," the <<person1>><<person>> says. They march closer. "Hold still, <<girl>>."
 				<br><br>
 
-				<<link [[도망친다|Catacombs Caught Run]]>><</link>><<athleticsdifficulty 1 800>>
+				<<link [[Run|Catacombs Caught Run]]>><</link>><<athleticsdifficulty 1 800>>
 				<br>
-				<<link [[싸운다|Catacombs Caught Fight]]>><<set $fightstart to 1>><</link>>
+				<<link [[Fight|Catacombs Caught Fight]]>><<set $fightstart to 1>><</link>>
 				<br>
-				<<link [[가만히 있는다|Catacombs Caught Still]]>><</link>>
+				<<link [[Hold still|Catacombs Caught Still]]>><</link>>
 				<br>
 			<</if>>
 		<</addinlineevent>>
 		<<addinlineevent "catacombs_compound_2" 0.5>>
 			<<if $catacombs_torch gte random(1, 100)>>
-				당신은 어둠 속에서 거의 보이지 않지만, <span class="green">앞쪽에 카메라가 있는 것을 발견한다.</span> 당신은 하마터면 카메라의 감시 경로 위를 걸어갈 뻔 했다. 그것이 어떤 용도인지는 확실하지 않지만, 카메라의 시야를 피해 지나간다.
+				<span class="green">You spot a camera up ahead,</span> barely visible in the gloom. You would have walked right into its path. You're not sure what it's for, but you avoid its line of sight.
 				<br><br>
 
 				<<destination_catacombs skip>>
 			<<else>>
-				빨간 불이 깜빡거린다. 그것은 카메라의 일부로, <span class="red">당신 쪽을 가리키고 있다.</span>
-				<<if $tentacledisable is "f">>
-					금속으로 된 덩굴같은 것이 어둠 속에서 솟아올라, 당신 주위를 휘감는다.
+				A red light blinks into life. It's part of a camera, <span class="red">pointed right at you.</span>
+				<<if $settings.tentaclesEnabled>>
+					Metal tendrils rise from the dark, coiling around you.
 					<br><br>
 
-					<<link [[다음|Catacombs Tentacles]]>><<set $molestationstart to 1>><</link>>
+					<<link [[Next|Catacombs Tentacles]]>><<set $molestationstart to 1>><</link>>
 					<br>
 				<<else>>
-					빛이 강렬해지고, 윙윙거리는 굉음이 동굴을 가득 채운다. 당신은 간신히 도망치지만, 서두르다가 몇 번이나 비틀거리기도 한다.<<beastescape>>
+					The light intensifies, and a whirring roar fills the tunnel. You manage to escape, but stumble a few times in your haste.<<beastescape>>
 					<br><br>
 
 					<<destination_catacombs skip>>
@@ -238,125 +237,125 @@
 
 	<<addinlineevent "catacombs_1" 1>>
 		<<if $worn.face.type.includes("blindfold")>>
-			당신은 앞이 보이지 않아서, 어떤 것과도 충돌하거나 발을 헛디디지 않도록 조심하며, 한 걸음 한 걸음 신중하게 내딛어 걷는다. 당신은 여전히 이상하게 딱딱한 구석을 스치고 지나간다. 발 밑의 깨진 도자기 조각들이, 발 아래에서 더 깨지며 부스러진다.<<gpain>><<pain 4>><<gstress>><<stress 6>>
+			You walk, each step deliberate, careful not to trip or collide with anything in your blindness. You still brush against the odd hard corner. Shattered crockery shatters further beneath your feet.<<gpain>><<pain 4>><<gstress>><<stress 6>>
 			<br><br>
 
 			<<destination_catacombs skip>>
 		<<else>>
-			길 한가운데에 똑바로 세워져, 열린 석관이 있다. 내부는 어둠에 가려져 있지만, 당신은 그 안에서 형체가 보인다고 생각한다.
+			You find an upright, open sarcophagus in the middle of your path. The interior is shrouded by the dark, but you think you see a figure inside.
 			<br><br>
 
 			<<if $catacombs_torch gte random(1, 100)>>
-				당신은 숨을 들이쉬고, 횃불로 내부를 밝힌다. <span class="green">그 안에는 시체가 없다.</span>
+				You inhale, and light up the interior with your torch. <span class="green">There's no body in there.</span>
 				<<if random(1, 4) is 4>>
-					그러나, 당신은 너덜너덜한 천 조각들은 발견한다. 당신은 그것으로 횃불을 밝힌다.<<gtorch>><<catacombs_torch 15>>
+					However, you do find some tattered scraps of cloth. You feed your torch.<<gtorch>><<catacombs_torch 15>>
 				<</if>>
 				<br><br>
 
 				<<destination_catacombs skip>>
 			<<else>>
-				<<link [[눈을 감고 옆을 지나간다|Catacombs Sarcophagus Close]]>><<trauma 6>><<pain 4>><</link>><<gpain>><<gtrauma>>
+				<<link [[Walk by with your eyes shut|Catacombs Sarcophagus Close]]>><<trauma 6>><<pain 4>><</link>><<gpain>><<gtrauma>>
 				<br>
-				<<link [[다른 길을 찾는다|Catacombs Sarcophagus Find]]>><<pass 5>><<catacombs_torch -5>><</link>><<ltorch>>
+				<<link [[Find another way around|Catacombs Sarcophagus Find]]>><<pass 5>><<catacombs_torch -5>><</link>><<ltorch>>
 				<br>
 			<</if>>
 		<</if>>
 	<</addinlineevent>>
 	<<addinlineevent "catacombs_2" 1>>
-		당신은 어둠 속에서 속삭이는 소리를 듣는다. 당신을 부르는 소리다. 당신은 숨이 가빠지는 것을 느낀다.
+		You hear whispers in the dark. Calling you. You feel your breath quicken.
 		<br><br>
 
 		<<if $catacombs_torch gte 1>>
-			당신은 그것을 조사해서, 거기에는 두려워할 것이 없다는 것을 증명할 수도 있다.
+			You could investigate, and prove there's nothing to be afraid of.
 			<br><br>
 
-			<<link [[조사한다|Catacombs Whispers Investigate]]>><<trauma -6>><<catacombs_torch -5>><</link>><<ltorch>><<gtrauma>>
+			<<link [[Investigate|Catacombs Whispers Investigate]]>><<trauma -6>><<catacombs_torch -5>><</link>><<ltorch>><<gtrauma>>
 			<br>
 		<</if>>
-		<<link [[무시한다|Catacombs Whispers Ignore]]>><</link>><<willpowerdifficulty 1 1000>>
+		<<link [[Ignore|Catacombs Whispers Ignore]]>><</link>><<willpowerdifficulty 1 1000>>
 		<br>
 	<</addinlineevent>>
 	<<addinlineevent "catacombs_3" 1>>
 		<<if $catacombs_torch gte random(1, 100)>>
-			통로를 완전히 덮고 있는, 커다란 거미줄이 보인다. 당신은 횃불을 들고, <span class="green">불태워버린다.</span>
+			You see a large spiderweb, completely covering the passage. You hold out your torch, <span class="green">and burn it away.</span>
 			<br><br>
 
 			<<destination_catacombs skip>>
-		<<elseif $leftarm is "bound" and $rightarm is "bound">>
-			당신은 거미줄 한가운데로 걸어 들어간다. 이미 묶인 팔에 거미줄이 달라붙는다. 당신은 할 수 있는 유일한 방법인, 몸 전체로 거미줄을 잡아당겨 끊어내는 방법으로 벗어나려 한다. 거미줄은 점점 더 팽팽해지다가, 갑자기 격렬하게 튀어오른다. 그 탄성은 당신을 거미줄 안으로 끌어올려, <span class="red">당신을 무력하게 매달리게 만든다.</span>
+		<<elseif pcAreArmsBound("both")>>
+			You walk right into a spiderweb. It sticks to your already-bound arms. You try to pull free in the only way you can, by pulling against the web with your whole body. The web gets tighter and tighter, until it snaps back violently. The elasticity pulls you up and into the web, <span class="red">leaving you suspended and helpless.</span>
 			<br><br>
 
-			<<link [[몸부림친다|Catacombs Struggle Web]]>><<pass 5>><<tiredness 1>><<stress 20>><<catacombs_torch -5>><</link>><<difficulty 30>><<gtiredness>><<gggstress>><<ltorch>>
+			<<link [[Struggle|Catacombs Struggle Web]]>><<pass 5>><<tiredness 1>><<stress 20>><<catacombs_torch -5>><</link>><<difficulty 30>><<gtiredness>><<gggstress>><<ltorch>>
 			<br>
 
 		<<else>>
-			<span class="red">당신은 거미줄 한가운데로 걸어 들어간다.</span> 당신은 거미줄을 당신의 얼굴에서 뜯어내지만, 이제는 당신의 손에 달라붙었고, 그리고 다른 손에도, 그리고 당신은 다리도 뒤덮였다는 것을 알아차린다. 틀림없이 큰 거미였을 거다. 
+			<span class="red">You walk right into a cobweb.</span> You tear it away from your face, but now it's stuck to your hand, then your other hand, then you notice your legs are covered as well. It must have been a large spider.
 			<br><br>
 
-			<<link [[뜯어 풀어낸다|Catacombs Tear]]>><</link>><<physiquedifficulty 1 20000>>
+			<<link [[Tear free|Catacombs Tear]]>><</link>><<physiquedifficulty 1 20000>>
 			<br>
-			<<link [[힘을 아낀다|Catacombs Save]]>><<stress -6>><</link>><<lstress>>
+			<<link [[Save your strength|Catacombs Save]]>><<stress -6>><</link>><<lstress>>
 		<</if>>
 	<</addinlineevent>>
 	<<addinlineevent "catacombs_4" 1>>
-		당신은 돌무더기 더미, 석조 건물과 약간의 흙도 없는 곳까지 온다. 여기 동굴은 무너졌지만, 틈이 곳곳에 있다.
+		You come to a pile of rubble, stone masonry and not a little soil. The tunnel has collapsed here, but there are gaps.
 		<br><br>
 
 		<<if $catacombs_torch gte random(1, 100)>>
-			당신은 틈들에 횃불을 밀어 넣어보며 가장 넓은 것을 고른다. <span class="green">당신은 통과할 수 있다는 확신이 있다.</span>
+			You poke your torch through the holes, and determine the widest. <span class="green">You're confident you'll fit.</span>
 			<br><br>
 
-			약간의 꿈틀거림이 필요하지만, <span class="green">어떻게든 틈새로 들어갈 수 있었고,</span> 잔해 반대편으로 나올 수 있었다.
+			It takes a bit of wriggling, <span class="green">but you manage to pull yourself clear,</span> and clamber down the other side of the rubble.
 			<br><br>
 
 			<<destination_catacombs skip>>
 		<<else>>
-			당신은 통과할 수 있을 만큼 충분히 넓은 틈을 찾는다. 당신은 당신이 찾은 틈이 가장 넓을 거라 생각하지만, <span class="red">확신할 수는 없다.</span>
+			You feel around for a gap wide enough to let you through. You think you've found the widest, <span class="red">but you can't tell for sure.</span>
 			<br><br>
 
-			<<link [[틈 사이로 몸을 우겨넣는다|Catacombs Squeeze]]>><</link>><<small_text>>
+			<<link [[Squeeze through a gap|Catacombs Squeeze]]>><</link>><<small_text>>
 			<br>
-			<<link [[우회한다 (0:10)|Catacombs Detour]]>><<pass 10>><<catacombs_torch -5>><</link>><<ltorch>>
+			<<link [[Take a detour (0:10)|Catacombs Detour]]>><<pass 10>><<catacombs_torch -5>><</link>><<ltorch>>
 			<br>
 		<</if>>
 	<</addinlineevent>>
-	<<if $spiderdisable is "f">>
+	<<if $settings.spidersEnabled>>
 		<<addinlineevent "catacombs_5" 1>>
 			<<if $catacombs_torch gte random(1, 100)>>
-				그림자 위에서 뭔가가 움직인다. 당신은 횃불을 들어 올린다. 그것이 뭐든 간에, <span class="green">그것은 불을 무서워한다.</span>
+				Something moves in the shadows overhead. You raise your torch. Whatever it is, <span class="green">it's afraid of the light.</span>
 				<br><br>
 
 				<<destination_catacombs skip>>
 			<<else>>
-				무언가가 <span class="red">당신의 어깨 위에 떨어진다.</span>
+				Something <span class="red">lands on your shoulder.</span>
 				<br><br>
 
-				<<link [[쳐다본다|Catacombs Spider Look]]>><</link>><<willpowerdifficulty 1 1000>>
+				<<link [[Look|Catacombs Spider Look]]>><</link>><<willpowerdifficulty 1 1000>>
 				<br>
-				<<link [[털어낸다|Catacombs Spider Brush]]>><<stress 12>><</link>><<ggstress>>
+				<<link [[Brush it off|Catacombs Spider Brush]]>><<stress 12>><</link>><<ggstress>>
 				<br>
 			<</if>>
 		<</addinlineevent>>
 	<</if>>
 	<<addinlineevent "catacombs_6" 1>>
 		<<if $catacombs_torch gte random(1, 100)>>
-			<span class="green">당신의 횃불이 쓰러진 기둥을 비추고 있다.</span> 당신은 발을 딛고 올라가 넘어간다.
+			<span class="green">Your torch lights up a fallen column.</span> You step up and over it.
 		<<else>>
-			어둠 속에 숨겨져 있는 단단한 돌에, 당신의 무릎이 부딪힌다. 쓰러진 기둥이 당신의 앞을 가로막고 있다. 당신은 발을 딛고 올라가 넘어간다.<<gpain>><<pain 4>>
+			Your knee collides with hard stone, concealed in the gloom. A fallen column lies in your way. You step up and over it.<<gpain>><<pain 4>>
 		<</if>>
 		<br><br>
 
 		<<destination_catacombs skip>>
 	<</addinlineevent>>
 	<<addinlineevent "catacombs_7" 1>>
-		<<if $worn.feet.type.includes("naked")>>
+		<<if $worn.feet.type.includes("naked") or $worn.feet.type.includes("shackle")>>
 			<<if $catacombs_torch gte random(1, 100)>>
-				당신의 횃불은 <span class="green">앞쪽에 부서진 도자기 파편들을 비춘다.</span> 당신은 파편들을 피해 걸어간다.
+				<span class="green">Your torch illuminates</span> shards of broken pottery up ahead. You step around them.
 			<<else>>
-				당신은 <span class="red">어둠 속에서 보이지 않는</span>, 깨진 도자기 조각들을 밟는다.<<gpain>><<gstress>><<pain 4>><<stress 6>>
+				You step on shards of broken pottery, <span class="red">invisible in the gloom.</span><<gpain>><<gstress>><<pain 4>><<stress 6>>
 			<</if>>
 		<<else>>
-			부서진 도자기가 발 밑에서 <span class="green">바스락거린다</span>.
+			Broken pottery <span class="green">crunches</span> underfoot.
 		<</if>>
 		<br><br>
 
@@ -374,41 +373,41 @@
 <<widget "destination_catacombs">>
 	<<switch $bus>>
 		<<case "sarcophagi">>
-			<<link [[다음|Catacombs Sarcophagi]]>><<catacombs_skip _args[0]>><</link>>
+			<<link [[Next|Catacombs Sarcophagi]]>><<catacombs_skip _args[0]>><</link>>
 		<<case "chasm">>
-			<<link [[다음|Catacombs Chasm]]>><<catacombs_skip _args[0]>><</link>>
+			<<link [[Next|Catacombs Chasm]]>><<catacombs_skip _args[0]>><</link>>
 		<<case "prison">>
-			<<link [[다음|Catacombs Prison]]>><<catacombs_skip _args[0]>><</link>>
+			<<link [[Next|Catacombs Prison]]>><<catacombs_skip _args[0]>><</link>>
 		<<case "ridge">>
-			<<link [[다음|Catacombs Ridge]]>><<catacombs_skip _args[0]>><</link>>
+			<<link [[Next|Catacombs Ridge]]>><<catacombs_skip _args[0]>><</link>>
 		<<case "mud">>
-			<<link [[다음|Catacombs Mud]]>><<catacombs_skip _args[0]>><</link>>
+			<<link [[Next|Catacombs Mud]]>><<catacombs_skip _args[0]>><</link>>
 		<<case "masonry">>
-			<<link [[다음|Catacombs Masonry]]>><<catacombs_skip _args[0]>><</link>>
+			<<link [[Next|Catacombs Masonry]]>><<catacombs_skip _args[0]>><</link>>
 		<<case "barrow">>
-			<<link [[다음|Catacombs Barrow]]>><<catacombs_skip _args[0]>><</link>>
+			<<link [[Next|Catacombs Barrow]]>><<catacombs_skip _args[0]>><</link>>
 		<<case "stream">>
-			<<link [[다음|Catacombs Stream]]>><<catacombs_skip _args[0]>><</link>>
+			<<link [[Next|Catacombs Stream]]>><<catacombs_skip _args[0]>><</link>>
 		<<case "stalagmites">>
-			<<link [[다음|Catacombs Stalagmites]]>><<catacombs_skip _args[0]>><</link>>
+			<<link [[Next|Catacombs Stalagmites]]>><<catacombs_skip _args[0]>><</link>>
 		<<case "bores">>
-			<<link [[다음|Catacombs Bores]]>><<catacombs_skip _args[0]>><</link>>
+			<<link [[Next|Catacombs Bores]]>><<catacombs_skip _args[0]>><</link>>
 		<<case "engravings">>
-			<<link [[다음|Catacombs Engravings]]>><<catacombs_skip _args[0]>><</link>>
+			<<link [[Next|Catacombs Engravings]]>><<catacombs_skip _args[0]>><</link>>
 		<<case "museum">>
-			<<link [[다음|Catacombs Museum]]>><<catacombs_skip _args[0]>><</link>>
+			<<link [[Next|Catacombs Museum]]>><<catacombs_skip _args[0]>><</link>>
 		<<case "statues">>
-			<<link [[다음|Catacombs Statues]]>><<catacombs_skip _args[0]>><</link>>
+			<<link [[Next|Catacombs Statues]]>><<catacombs_skip _args[0]>><</link>>
 		<<case "compound">>
-			<<link [[다음|Catacombs Compound]]>><<catacombs_skip _args[0]>><</link>>
+			<<link [[Next|Catacombs Compound]]>><<catacombs_skip _args[0]>><</link>>
 		<<default>>
-			<<link [[다음|Catacombs]]>><<catacombs_skip _args[0]>><</link>>
+			<<link [[Next|Catacombs]]>><<catacombs_skip _args[0]>><</link>>
 	<</switch>>
 <</widget>>
 
 <<widget "catacombs_exit_indicator">>
-	<<if $statdisable is "f">> |
-		<span class="teal">출구에 더 가까움</span>
+	<<if !$settings.blindStatsEnabled>> |
+		<span class="teal">Closer to exit</span>
 	<</if>>
 <</widget>>
 
@@ -442,9 +441,33 @@
 	<<else>>
 		<<passout>>
 		<<pass 60>>
-		당신은 너무 무리했다.
+		You've pushed yourself too much.
 		<br><br>
-		<<link [[다음|Catacombs Passout]]>><</link>>
+		<<link [[Next|Catacombs Passout]]>><</link>>
 		<br>
+	<</if>>
+<</widget>>
+
+<<widget "catacombs_plunder">>
+	<<if !pcAreArmsBound("any")>>
+		<<set $lock to _args[1] ? _args[1] : 500>>
+		<<if currentSkillValue('skulduggery') gte $lock>>
+			<span class="green">There are riches entombed here.</span>
+			<br>
+			<<crimeicon "plunder">>
+			<<if _args[0] is "normal">>
+				<<link [[Plunder (0:30)|Catacombs Normal Plunder]]>><<pass 30>><<catacombs_torch -5>><</link>><<crime "thievery">><<ltorch>>
+			<<elseif _args[0] is "barrow">>
+				<<link [[Plunder (0:30)|Catacombs Barrow Plunder]]>><<pass 30>><<catacombs_torch -5>><</link>><<crime "thievery">><<ltorch>>
+			<<elseif _args[0] is "compound">>
+				<<link [[Plunder (0:30)|Catacombs Compound Plunder]]>><<pass 30>><<catacombs_torch -5>><</link>><<crime "thievery">><<ltorch>>
+			<<else>>
+				<span class='red'>Invalid plunder location '<<print _args[0]>>', please report.</span>
+			<</if>>
+			<br>
+		<<else>>
+			<span class="red">You lack the skill to sniff out the riches here.</span><<skulduggeryrequired>>
+			<br><br>
+		<</if>>
 	<</if>>
 <</widget>>
