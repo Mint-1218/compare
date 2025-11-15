@@ -4,31 +4,31 @@
 <<if $brothel_basement_intro is undefined>>
 	<<set $brothel_basement_intro to 1>>
 	<<generate1>><<person1>>
-	가까운 문에서 <<person_ i>> 나온다. <<He_ nun>> <<his_ yi>> 얼굴 윗부분을 가리는 검은 마스크를 쓰고 있다.
+	A <<person>> emerges from a nearby door. <<He>> wears a black mask that covers the top half of <<his>> face.
 	<br><br>
-	"길을 잃어버린 것 같아 보이는구나," <<He_ nun>> 껄껄 웃는다. "이 방들은 직원들을 위한 곳이란다." <<He_ nun>> 계단 근처의 표지판을 가리킨다. <<printmoney $brothel_basement_price>>라고 쓰여있다.
+	"You look lost," <<he>> chuckles. "These rooms are for employees." <<He>> points at a sign near the stairs. It reads <<printmoney $brothel_basement_price>>.
 	<<if $brothel_basement_price gte 2000>>
-		"오늘은 좀 비싸구나.
+		"Expensive today.
 	<<else>>
-		"일반적인 가격이지.
+		"That's a typical price.
 	<</if>>
-	무대를 사용하는 것만큼 벌지는 못하지만, 이렇게 하면 아무도 네가 누구인지 알 필요가 없지."
+	Not as much as using a stage, but this way no one needs to know who you are."
 	<br><br>
-	<<link [[다음|Brothel Basement]]>><<endevent>><</link>>
+	<<link [[Next|Brothel Basement]]>><<endevent>><</link>>
 	<br>
 <<else>>
-	당신은 창관 지하실에 있다. 한 줄로 늘어선 작은 방들이 한쪽 벽에 늘어서 있다. 각 방 안에는 하나의 <<if $awareness gte 200>>글로리홀<<else>>구멍<</if>>이 있다.
+	You are in the brothel basement. A row of small rooms lines one wall. Inside each is a single <<if $awareness gte 200>>gloryhole<<else>>hole<</if>>.
 	<br><br>
-	계단 옆에 있는 표지판에는 <<printmoney $brothel_basement_price>>라고 쓰여있다.
+	A sign by the stairs reads <<printmoney $brothel_basement_price>>.
 	<br><br>
 	<<if hasSexStat("promiscuity", 4)>>
-		<<brothelicon "gloryhole">><<link [[방을 차지한다 (0:10)|Brothel Gloryhole]]>><<pass 10>><<set $phase to 1>><</link>><<promiscuous4>>
+		<<brothelicon "gloryhole">><<link [[Occupy a room (0:10)|Brothel Gloryhole]]>><<pass 10>><<set $phase to 1>><</link>><<promiscuous4>>
 		<br>
 	<<else>>
-		<span class="lewd">당신은 글로리홀에서 일할 만큼 음란하지 않다.</span>
+		<<insufficientStat "promiscuity" "to work at the gloryholes">>
 		<br><br>
 	<</if>>
-	<<getouticon>><<link [[떠난다|Brothel]]>><</link>>
+	<<getouticon>><<link [[Leave|Brothel]]>><</link>>
 	<br>
 <</if>>
 
@@ -39,21 +39,21 @@
 <<generate1>><<person1>>
 <<if $phase is 1>><<set $phase to 0>>
 
-당신은 방들 중 하나에 들어가서 문을 닫는다. 녹색 불빛이 위에서 깜박거린다.
+You enter one of the rooms and close the door behind you. A green light flickers on above.
 
 <<else>>
 <</if>>
 
-몇 분을 기다리자 불이 빨간색으로 바뀌면서,
+You wait for several minutes, and the light turns red. A
 <<if $NPCList[0].penis isnot "none">>
-<<penisdesc_ ga $NPCList[0].penisdesc>> 구멍을 뚫고 들어온다.
+$NPCList[0].penisdesc pokes through the hole.
 <<else>>
-보지가 구멍에 나타난다.
+pussy appears at the hole.
 <</if>>
 <br><br>
-<<ind>><<link [[일한다|Brothel Basement Sex]]>><<set $sexstart to 1>><<tiredness 3>><</link>><<gtiredness>>
+<<brothelicon>><<link [[Engage|Brothel Basement Sex]]>><<set $sexstart to 1>><<tiredness 3>><</link>><<gtiredness>>
 <br>
-<<getouticon>><<link [[떠난다|Brothel Basement]]>><<endevent>><<unset $desperateaction>><</link>>
+<<getouticon>><<link [[Leave|Brothel Basement]]>><<endevent>><<unset $desperateaction>><</link>>
 <br>
 
 :: Brothel Basement Sex
@@ -76,9 +76,9 @@
 <<actionsman>>
 
 <<if _combatend>>
-	<span id="next"><<link [[다음|Brothel Basement Sex Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[Next|Brothel Basement Sex Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[다음|Brothel Basement Sex]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[Next|Brothel Basement Sex]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Brothel Basement Sex Finish
@@ -87,37 +87,38 @@
 <<set $punishmentposition to 0>>
 <<if $enemyarousal gte $enemyarousalmax>>
 	<<ejaculation>><<set $gloryholestat += 1>><<set $prostitutionstat += 1>>
-	<<tearful>> 당신은 <<he_ ga>> 구멍으로 밀어넣는 돈을 세어본다. 당신은 <<printmoney $brothel_basement_price>>만큼 벌었다.
-	<<set $money += $brothel_basement_price>>
+	<<tearful>> you count the money <<he>> pushes through the hole. You've gained <<printmoney $brothel_basement_price>>.
+	<<money $brothel_basement_price "brothelGloryhole">>
 	<br><br>
 
 	<<clotheson>>
 	<<endcombat>>
 
 <<elseif $enemyhealth lte 0>>
-	벽 뒤에서 고통의 외침이 들리고,
+	You hear a shout of pain from behind the wall, and the
 	<<if $NPCList[0].penis isnot "none">>
-	<<penisdesc_ ga $NPCList[0].penisdesc>> 사라진다.
+		$NPCList[0].penisdesc
 	<<else>>
-	보지가 사라진다
+		pussy
 	<</if>>
+	disappears.
 	<br><br>
-	<<tearful>> 당신은 당신의 발로 일어난다.
+	<<tearful>> you rise to your feet.
 	<br><br>
 	<<clotheson>>
 	<<endcombat>>
 
 <<else>>
-	벽 반대편에서 <<person_ i>> 투덜거리는 소리가 들린다.
+	You hear the <<person>> grumble on the other side of the wall.
 	<br><br>
-	<<tearful>> 당신은 당신의 발로 일어난다.
+	<<tearful>> you rise to your feet.
 	<br><br>
 	<<clotheson>>
 	<<endcombat>>
 
 <</if>>
 
-<<ind>><<link [[다른 손님을 기다린다 (0:10)|Brothel Gloryhole]]>><<pass 10>><</link>>
+<<link [[Wait for another customer (0:10)|Brothel Gloryhole]]>><<pass 10>><</link>>
 <br>
-<<getouticon>><<link [[떠난다|Brothel Basement]]>><</link>>
+<<link [[Leave|Brothel Basement]]>><</link>>
 <br>
