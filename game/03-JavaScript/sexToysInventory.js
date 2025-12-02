@@ -187,7 +187,7 @@ function sexToysInventoryOnWearClick(index, category) {
 	$("[id*='sti_already_owned_']").each(function (i, element) {
 		const c = element.getAttribute("data-category");
 		const ind = element.getAttribute("data-index");
-		element.textContent = V.player.inventory.sextoys[c][ind].worn ? "착용중" : V.player.inventory.sextoys[c][ind].carried ? "소지중" : "";
+		element.textContent = V.player.inventory.sextoys[c][ind].worn ? "착용중" : V.player.inventory.sextoys[c][ind].carried ? "소지 중" : "";
 	});
 	// this is an exception for strap-ons. Upon "wearing", also set them in under_lower as they don't have their own category yet.
 	if (setupCategory === "strap-on") {
