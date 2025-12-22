@@ -1,42 +1,42 @@
 function buildEyeDetails() {
-	let sentence = ""; let sentence_end = "";
+	let sentence = "";
 	let concatFlag = false;
 	const lenses = V.makeup.eyelenses;
 	const colourMap = setup.colours.eyes_map;
 
 	if (lenses.right !== 0 || lenses.left !== 0) {
-		sentence += "당신은 "; sentence_end = "에 착용하고 있다";
+		sentence += "You wear ";
 		if (typeof lenses.left === "string") {
-			sentence += trColour(setup.colours.eyes_map[lenses.left].name, "과", "sep");
+			sentence += setup.colours.eyes_map[lenses.left].name;
 			concatFlag = true;
 		}
 		if (typeof lenses.right === "string" && lenses.left !== lenses.right) {
-			if (concatFlag) sentence += T.trPost + " ";
-			sentence += trColour(setup.colours.eyes_map[lenses.right].name);
+			if (concatFlag) sentence += " and ";
+			sentence += setup.colours.eyes_map[lenses.right].name;
 			concatFlag = true;
 		}
 		if (concatFlag) {
-			sentence += "의 콘택트 렌즈를 ";
+			sentence += " eye lenses ";
 		}
-		sentence += "당신의 ";
+		sentence += "on top of your ";
 	} else {
-		sentence += "당신의 눈은 "; sentence_end = "이다";
+		sentence += "You have ";
 	}
 	concatFlag = false;
 
 	const leftEyeColour = colourMap[V.leftEyeColour];
 	const rightEyeColour = colourMap[V.rightEyeColour];
 	if (typeof leftEyeColour === "object") {
-		sentence += trColour(leftEyeColour.name, "과", "sep");
+		sentence += leftEyeColour.name;
 		concatFlag = true;
 	}
 	if (typeof rightEyeColour === "object" && V.leftEyeColour !== V.rightEyeColour) {
-		if (concatFlag) sentence += T.trPost + " ";
-		sentence += trColour(rightEyeColour.name);
+		if (concatFlag) sentence += " and ";
+		sentence += rightEyeColour.name;
 		concatFlag = true;
 	}
-	if (concatFlag) sentence += " 눈";
-	return sentence + sentence_end + ".";
+	if (concatFlag) sentence += " eyes";
+	return sentence + ".";
 }
 window.buildEyeDetails = buildEyeDetails;
 
@@ -169,7 +169,7 @@ window.determineCatEyeStages = function () {
 
 	/* The right eye is the one we see the most.
 	   If this eye is light blue and the target colour is blue, the player
-	   might not notice a difference.  So, swap the two eyes */
+	   might not notice a difference. So, swap the two eyes */
 	if (V.rightEyeColour === "light blue" && targetColours[1] === blue) targetColours = [targetColours[1], targetColours[0]];
 	for (let index = 1; index <= stages; index++) {
 		const eyesResult = {
